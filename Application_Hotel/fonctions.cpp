@@ -37,7 +37,7 @@ void connexion(const unique_ptr<Connection>& conn) {
 
         else {
             cout << "Table deja remplie." << endl;
-            this_thread::sleep_for(std::chrono::seconds(2));
+            //this_thread::sleep_for(std::chrono::seconds(2));
             system("cls");
             getMenu(conn);
         }
@@ -133,9 +133,25 @@ void doReserv(const unique_ptr<Connection>& conn) {
     // Create a new Statement
     unique_ptr<Statement> stmnt(conn->createStatement());
 
+    struct vector<Chambres> chambresPrete;
+
     // Execute query
-    ResultSet* res = stmnt->executeQuery("SELECT COUNT(*) FROM Chambres WHERE ");
-    res->next();
+    ResultSet* res = stmnt->executeQuery("SELECT * FROM Chambres WHERE isReserved = FALSE");
+
+
+    int i = 0;
+    while (res->next()) {
+        //cout << res->getInt(2);
+        //cout << res->getBoolean(5);
+        chambresPrete.push_back(Chambres());
+        chambresPrete[i].numero = res->getInt(2);
+        chambresPrete[i].isReserved = res->getBoolean(5);
+        i++;
+    }
+
+    for (int i = 0; i < chambresPrete.size(); i++) {
+        cout <<  chambresPrete[i].numero << endl;
+    }
     
 }
 

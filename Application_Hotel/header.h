@@ -10,6 +10,8 @@
 
 using namespace std;
 using namespace sql;
+#using <System.dll>
+#using <System.Windows.Forms.dll>
 //using namespace std::this_thread; 
 //using namespace std::chrono;
 
@@ -17,8 +19,7 @@ struct Chambres {
     string nom;
     string prenom;
     int numero;
-    bool reserv;
-    bool occupy;
+    bool isReserved;
 };
 
 
