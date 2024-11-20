@@ -8,10 +8,12 @@
 
 #define HEADER_H
 
+
 using namespace std;
 using namespace sql;
-#using <System.dll>
-#using <System.Windows.Forms.dll>
+using namespace System;
+using namespace System::Windows::Forms;
+
 //using namespace std::this_thread; 
 //using namespace std::chrono;
 

@@ -78,7 +78,7 @@ void getMenu(const unique_ptr<Connection>& conn) {
     cout << "Montrer la liste des reservations : [5]" << endl;
     cout << "Trouver une reservation : [6]" << endl;
     cout << "Echanger les reservations : [7]" << endl;
-    cout << "Afficher les reservations par nom, prenom ou chambres occupés : [8]" << endl;
+    cout << "Afficher les reservations par nom, prenom ou chambres occupees : [8]" << endl;
     cout << "Statistique de reservation : [9]" << endl;
     cout << "Quitter le menu : [0]" << endl;
     cin >> nav;
