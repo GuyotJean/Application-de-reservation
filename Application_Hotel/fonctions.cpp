@@ -1,4 +1,5 @@
 #include "header.h"
+#include "myForm.h";
 
 void connexion(const unique_ptr<Connection>& conn) {
     try {
@@ -70,6 +71,7 @@ void AfficherDonnees(const unique_ptr<Connection>& conn) {
 
 
 void getMenu(const unique_ptr<Connection>& conn) {
+
     int nav;
     cout << "Faire une reservation : [1]" << endl;
     cout << "Annuler la reservation : [2]" << endl;
@@ -78,10 +80,11 @@ void getMenu(const unique_ptr<Connection>& conn) {
     cout << "Montrer la liste des reservations : [5]" << endl;
     cout << "Trouver une reservation : [6]" << endl;
     cout << "Echanger les reservations : [7]" << endl;
-    cout << "Afficher les reservations par nom, prenom ou chambres occupés : [8]" << endl;
+    cout << "Afficher les reservations par nom, prenom ou chambres occupees : [8]" << endl;
     cout << "Statistique de reservation : [9]" << endl;
     cout << "Quitter le menu : [0]" << endl;
     cin >> nav;
+
 
     switch (nav)
     {

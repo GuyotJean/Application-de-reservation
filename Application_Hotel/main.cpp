@@ -1,6 +1,24 @@
 #include "header.h";
+#include "myForm.h";
+
+
+[STAThread]
+
+
+
 int main()
 {
+    cout << "Test";
+    
+   /* AllocConsole();
+    FILE* pFile;
+    freopen_s(&pFile, "CONOUT$", "w", stdout);
+    freopen_s(&pFile, "CONOUT$", "w", stderr);
+    */
+    // Créer et afficher le formulaire principal
+
+
+
 
     // Instantiate Driver
     Driver* driver = mariadb::get_driver_instance();
@@ -12,12 +30,14 @@ int main()
     // Establish Connection
     unique_ptr<Connection> conn(driver->connect(url, properties));
 
-
     connexion(conn);
 
-    vector<Chambres> chambres(10);
+    //vector<Chambres> chambres(10);
 
     //getMenu(chambres);
+
+    ApplicationHotel::MyForm form;
+    Application::Run(% form);
 
     /*
     // Sélectionner la base de données
