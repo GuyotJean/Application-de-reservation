@@ -2,7 +2,7 @@
 #include "myForm.h";
 
 
-[STAThread]
+[STAThreadAttribute]
 
 
 
@@ -19,6 +19,13 @@ int main()
 
 
 
+
+    Application::EnableVisualStyles();
+    Application::SetCompatibleTextRenderingDefault(false);
+
+    // Créer et afficher le formulaire principal
+    ApplicationHotel::MyForm form;
+    Application::Run(% form);
 
     // Instantiate Driver
     Driver* driver = mariadb::get_driver_instance();

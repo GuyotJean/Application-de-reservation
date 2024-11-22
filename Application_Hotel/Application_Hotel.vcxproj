@@ -111,7 +111,7 @@
       <AdditionalIncludeDirectories>C:\Program Files\MariaDB\MariaDB C++ Connector 64-bit\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>mariadbcpp.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>C:\Program Files\MariaDB\MariaDB C++ Connector 64-bit;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>

@@ -119,5 +119,5 @@ namespace ApplicationHotel {
         if (btnGo->Visible == false)
         btnGo->Visible = true;
     }
-};
+    };
 }
