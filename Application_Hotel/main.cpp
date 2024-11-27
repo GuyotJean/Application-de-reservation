@@ -1,11 +1,6 @@
 #include "header.h";
 #include "myForm.h";
 
-
-[STAThreadAttribute]
-
-
-
 int main()
 {
     cout << "Test";
