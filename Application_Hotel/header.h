@@ -3,20 +3,12 @@
 #include <vector>
 #include <string>
 #include <mariadb/conncpp.hpp>
-#include <chrono>
-#include <thread>
 #include <Windows.h>
-
-#define HEADER_H
-
 
 using namespace std;
 using namespace sql;
 using namespace System;
 using namespace System::Windows::Forms;
-
-//using namespace std::this_thread; 
-//using namespace std::chrono;
 
 struct Chambres {
     string nom;
@@ -25,8 +17,11 @@ struct Chambres {
     bool isReserved;
 };
 
+//Declaration de variable global
+extern vector<Chambres> chambres;
 
-void AfficherDonnees(const unique_ptr<Connection>& conn);
+//Definition des fonctions
+vector<Chambres> AfficherDonnees(const unique_ptr<Connection>& conn);
 void getMenu(const unique_ptr<Connection>& conn);
 void changeChambre(const unique_ptr<Connection>& conn);
 void showAllReserv(const unique_ptr<Connection>& conn);

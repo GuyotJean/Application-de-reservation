@@ -1,5 +1,6 @@
 #include "header.h"
-#include "myForm.h";
+
+
 
 void connexion(const unique_ptr<Connection>& conn) {
     try {
@@ -21,7 +22,7 @@ void connexion(const unique_ptr<Connection>& conn) {
             unique_ptr<sql::PreparedStatement> pstmt(conn->prepareStatement(query));
             bool isReserved = false;
 
-            for (int i = 0; i < 10; i++) {
+            for (int i = 1; i < 11; i++) {
                 int data1 = 100 + i;
 
                 pstmt->setInt(1, data1);
@@ -33,14 +34,13 @@ void connexion(const unique_ptr<Connection>& conn) {
 
             cout << "Table prete." << endl;
             system("cls");
-            getMenu(conn);
+            //AfficherDonnees(conn);
         }
 
         else {
             cout << "Table deja remplie." << endl;
-            //this_thread::sleep_for(std::chrono::seconds(2));
             system("cls");
-            getMenu(conn);
+            //AfficherDonnees(conn);
         }
     }
     catch (SQLException) {
@@ -50,8 +50,10 @@ void connexion(const unique_ptr<Connection>& conn) {
 
 }
 
+//returnConn
 
-void AfficherDonnees(const unique_ptr<Connection>& conn) {
+
+vector<Chambres> AfficherDonnees(const unique_ptr<Connection>& conn) {
     // Create a new Statement
     unique_ptr<Statement> stmnt(conn->createStatement());
 
@@ -59,14 +61,21 @@ void AfficherDonnees(const unique_ptr<Connection>& conn) {
     ResultSet* res = stmnt->executeQuery("SELECT * FROM Chambres");
 
     // Loop through and print results
-    while (res->next()) {
-        cout << "id = " << res->getInt(1);
-        cout << ", Numero = " << res->getInt(2);
-        cout << ", Nom = " << res->getString(3);
-        cout << ", Prenom = " << res->getString(4);
-        cout << ", isReserved = " << res->getString(5) << endl;
 
+    int i = 0;
+
+    vector<Chambres> chambres;
+
+    while (res->next()) {
+        chambres.push_back(Chambres());
+        chambres[i].numero = res->getInt(2);
+        chambres[i].nom = res->getString(3);
+        chambres[i].prenom = res->getString(4);
+        chambres[i].isReserved = res->getBoolean(5);
+        i++;
     }
+
+    return chambres;
 }
 
 
