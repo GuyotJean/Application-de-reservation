@@ -1,8 +1,14 @@
 #include "header.h"
 #include "myForm.h";
 
+using namespace System;
+using namespace System::Windows::Forms;
+
+
+
 void connexion(const unique_ptr<Connection>& conn) {
     try {
+
 
         conn->setSchema("Hotel");
         // Create a new Statement
@@ -33,14 +39,14 @@ void connexion(const unique_ptr<Connection>& conn) {
 
             cout << "Table prete." << endl;
             system("cls");
-            getMenu(conn);
+            AfficherDonnees(conn);
         }
 
         else {
             cout << "Table deja remplie." << endl;
             //this_thread::sleep_for(std::chrono::seconds(2));
             system("cls");
-            getMenu(conn);
+            AfficherDonnees(conn);
         }
     }
     catch (SQLException) {
@@ -58,6 +64,8 @@ void AfficherDonnees(const unique_ptr<Connection>& conn) {
     // Execute query
     ResultSet* res = stmnt->executeQuery("SELECT * FROM Chambres");
 
+    int test;
+
     // Loop through and print results
     while (res->next()) {
         cout << "id = " << res->getInt(1);
@@ -65,8 +73,11 @@ void AfficherDonnees(const unique_ptr<Connection>& conn) {
         cout << ", Nom = " << res->getString(3);
         cout << ", Prenom = " << res->getString(4);
         cout << ", isReserved = " << res->getString(5) << endl;
-
+        
+        
+        test = res->getInt(2);
     }
+
 }
 
 

@@ -3,20 +3,16 @@
 #include <vector>
 #include <string>
 #include <mariadb/conncpp.hpp>
-#include <chrono>
-#include <thread>
 #include <Windows.h>
-
-#define HEADER_H
-
 
 using namespace std;
 using namespace sql;
 using namespace System;
 using namespace System::Windows::Forms;
 
-//using namespace std::this_thread; 
-//using namespace std::chrono;
+
+extern int test;
+
 
 struct Chambres {
     string nom;

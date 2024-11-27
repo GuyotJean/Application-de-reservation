@@ -5,6 +5,6 @@ using namespace System::Windows::Forms;
 
 
 void Application(void)
-{
 
+{
 }

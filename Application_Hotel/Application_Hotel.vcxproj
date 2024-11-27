@@ -111,12 +111,15 @@
       <AdditionalIncludeDirectories>C:\Program Files\MariaDB\MariaDB C++ Connector 64-bit\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>mariadbcpp.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>C:\Program Files\MariaDB\MariaDB C++ Connector 64-bit;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <EntryPointSymbol>main</EntryPointSymbol>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy /y "C:\Program Files\MariaDB\MariaDB C++ Connector 64-bit\*.dll"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
