@@ -22,6 +22,7 @@ int main()
     //Definition du vector global chambres
     chambres = afficherDonnees(conn);
 
+    //getMenu(chambres);
     Application::EnableVisualStyles();
     Application::SetCompatibleTextRenderingDefault(false);
     ApplicationHotel::MyForm form;
