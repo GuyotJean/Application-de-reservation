@@ -10,10 +10,6 @@ using namespace sql;
 using namespace System;
 using namespace System::Windows::Forms;
 
-
-extern int test;
-
-
 struct Chambres {
     string nom;
     string prenom;
@@ -21,8 +17,11 @@ struct Chambres {
     bool isReserved;
 };
 
+//Declaration de variable global
+extern vector<Chambres> chambres;
 
-void AfficherDonnees(const unique_ptr<Connection>& conn);
+//Definition des fonctions
+vector<Chambres> AfficherDonnees(const unique_ptr<Connection>& conn);
 void getMenu(const unique_ptr<Connection>& conn);
 void changeChambre(const unique_ptr<Connection>& conn);
 void showAllReserv(const unique_ptr<Connection>& conn);
