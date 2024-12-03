@@ -1,20 +1,11 @@
 #include "header.h";
-#include "myForm.h";
+#include "MyForm.h";
 
-void afficherTest() {
-    // Utilisation de la variable globale
-    std::cout << "Test dans autreFichier.cpp : " << test << std::endl;
-}
+//Declaration de global
+vector<Chambres> chambres;
 
 int main()
 {
-
-
-
-    Application::EnableVisualStyles();
-    Application::SetCompatibleTextRenderingDefault(false);
-
-
     // Instantiate Driver
     Driver* driver = mariadb::get_driver_instance();
 
@@ -25,10 +16,14 @@ int main()
     // Establish Connection
     unique_ptr<Connection> conn(driver->connect(url, properties));
 
-    connexion(conn);
+    //Objet de connexion mariaDB
+    creationTable(conn);
+    
+    //Definition du vector global chambres
+    chambres = afficherDonnees(conn);
 
-    cout << test;
-
+    Application::EnableVisualStyles();
+    Application::SetCompatibleTextRenderingDefault(false);
     ApplicationHotel::MyForm form;
     Application::Run(% form);
 

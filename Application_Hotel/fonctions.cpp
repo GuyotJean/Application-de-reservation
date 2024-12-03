@@ -1,12 +1,21 @@
 #include "header.h"
-#include "myForm.h";
 
-using namespace System;
-using namespace System::Windows::Forms;
+    unique_ptr<sql::Connection> initialiseConn() {
+        // Instantiate Driver
+        Driver* driver = mariadb::get_driver_instance();
+
+        // Configure Connection
+        SQLString url("jdbc:mariadb://localhost:3306/hotel");
+        Properties properties({ {"user", "jean"}, {"password", "123"} });
+
+        // Establish Connection
+        unique_ptr<Connection> conn(driver->connect(url, properties));
+
+        return conn;
+    }
 
 
-
-void connexion(const unique_ptr<Connection>& conn) {
+void creationTable(const unique_ptr<Connection>& conn) {
     try {
 
 
@@ -27,7 +36,7 @@ void connexion(const unique_ptr<Connection>& conn) {
             unique_ptr<sql::PreparedStatement> pstmt(conn->prepareStatement(query));
             bool isReserved = false;
 
-            for (int i = 0; i < 10; i++) {
+            for (int i = 1; i < 11; i++) {
                 int data1 = 100 + i;
 
                 pstmt->setInt(1, data1);
@@ -39,14 +48,13 @@ void connexion(const unique_ptr<Connection>& conn) {
 
             cout << "Table prete." << endl;
             system("cls");
-            AfficherDonnees(conn);
+            //AfficherDonnees(conn);
         }
 
         else {
             cout << "Table deja remplie." << endl;
-            //this_thread::sleep_for(std::chrono::seconds(2));
             system("cls");
-            AfficherDonnees(conn);
+            //AfficherDonnees(conn);
         }
     }
     catch (SQLException) {
@@ -56,29 +64,35 @@ void connexion(const unique_ptr<Connection>& conn) {
 
 }
 
+//returnConn
 
-void AfficherDonnees(const unique_ptr<Connection>& conn) {
+
+vector<Chambres> afficherDonnees(const unique_ptr<Connection>& conn) {
     // Create a new Statement
     unique_ptr<Statement> stmnt(conn->createStatement());
 
     // Execute query
     ResultSet* res = stmnt->executeQuery("SELECT * FROM Chambres");
 
-    int test;
-
     // Loop through and print results
+
+    int i = 0;
+
+    vector<Chambres> chambres;
+
     while (res->next()) {
-        cout << "id = " << res->getInt(1);
-        cout << ", Numero = " << res->getInt(2);
-        cout << ", Nom = " << res->getString(3);
-        cout << ", Prenom = " << res->getString(4);
-        cout << ", isReserved = " << res->getString(5) << endl;
-        
-        
-        test = res->getInt(2);
+        chambres.push_back(Chambres());
+        chambres[i].numero = res->getInt(2);
+        chambres[i].nom = res->getString(3);
+        chambres[i].prenom = res->getString(4);
+        chambres[i].isReserved = res->getBoolean(5);
+        i++;
     }
 
+    return chambres;
 }
+
+
 
 
 void getMenu(const unique_ptr<Connection>& conn) {
@@ -100,7 +114,6 @@ void getMenu(const unique_ptr<Connection>& conn) {
     switch (nav)
     {
     case 1:
-        doReserv(conn);
         break;
     case 2:
         undoReserv(conn);
@@ -133,38 +146,26 @@ void getMenu(const unique_ptr<Connection>& conn) {
 }
 
 
-void doReserv(const unique_ptr<Connection>& conn) {
-    system("cls");
+void doReserv(int n) {
 
-    string nom, prenom;
+    try {
+        unique_ptr<sql::Connection> conn = initialiseConn();
+        string query = "UPDATE Chambres SET Nom = ?, Prenom = ?, isReserved = ? WHERE Numero = ?";
 
-    cout << "Veuillez entrez votre prenom : ";
-    cin >> prenom;
+        unique_ptr<sql::PreparedStatement> stmt(conn->prepareStatement(query));
 
-    cout << "Veuillez entrez votre nom : ";
-    cin >> nom;
-    
-    // Create a new Statement
-    unique_ptr<Statement> stmnt(conn->createStatement());
+        cout << "Fonction appelee";
 
-    struct vector<Chambres> chambresPrete;
+        stmt->setString(1, chambres[n].nom);
+        stmt->setString(2, chambres[n].prenom);
+        stmt->setBoolean(3, chambres[n].isReserved);
+        stmt->setInt(4, chambres[n].numero);
 
-    // Execute query
-    ResultSet* res = stmnt->executeQuery("SELECT * FROM Chambres WHERE isReserved = FALSE");
+        stmt->executeQuery();
 
-
-    int i = 0;
-    while (res->next()) {
-        //cout << res->getInt(2);
-        //cout << res->getBoolean(5);
-        chambresPrete.push_back(Chambres());
-        chambresPrete[i].numero = res->getInt(2);
-        chambresPrete[i].isReserved = res->getBoolean(5);
-        i++;
     }
-
-    for (int i = 0; i < chambresPrete.size(); i++) {
-        cout <<  chambresPrete[i].numero << endl;
+    catch (sql::SQLException& e) {
+        std::cerr << "Erreur lors de l'exécution de la requête : " << e.what() << std::endl;
     }
     
 }
@@ -205,4 +206,16 @@ void ModifyReserv(const unique_ptr<Connection>& conn) {
 
 void leaveMenu(const unique_ptr<Connection>& conn) {
     cout << "Vous etes sorti(e).";
+}
+
+
+
+void afficherStruct() {
+    for (Chambres chambre : chambres) {
+        cout << chambre.numero << endl;
+        cout << chambre.nom << endl;
+        cout << chambre.prenom << endl;
+        cout << chambre.isReserved << endl << endl;
+
+    }
 }
