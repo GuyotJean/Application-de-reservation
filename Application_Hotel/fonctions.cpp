@@ -1,20 +1,21 @@
 #include "header.h"
 
-    unique_ptr<sql::Connection> initialiseConn() {
-        // Instantiate Driver
-        Driver* driver = mariadb::get_driver_instance();
+//Réinitialise la connexion
+unique_ptr<sql::Connection> initialiseConn() {
+    // Instantiate Driver
+    Driver* driver = mariadb::get_driver_instance();
 
-        // Configure Connection
-        SQLString url("jdbc:mariadb://localhost:3306/hotel");
-        Properties properties({ {"user", "jean"}, {"password", "123"} });
+    // Configure Connection
+    SQLString url("jdbc:mariadb://localhost:3306/hotel");
+    Properties properties({ {"user", "jean"}, {"password", "123"} });
 
-        // Establish Connection
-        unique_ptr<Connection> conn(driver->connect(url, properties));
+    // Establish Connection
+    unique_ptr<Connection> conn(driver->connect(url, properties));
 
-        return conn;
-    }
+    return conn;
+}
 
-
+//Creation de la table si elle n'existe pas
 void creationTable(const unique_ptr<Connection>& conn) {
     try {
 
@@ -64,10 +65,8 @@ void creationTable(const unique_ptr<Connection>& conn) {
 
 }
 
-//returnConn
-
-
-vector<Chambres> afficherDonnees(const unique_ptr<Connection>& conn) {
+//Prend les data mariaDB et les mets dans un vector de structures global
+vector<Chambres> getData(const unique_ptr<Connection>& conn) {
     // Create a new Statement
     unique_ptr<Statement> stmnt(conn->createStatement());
 
@@ -94,58 +93,7 @@ vector<Chambres> afficherDonnees(const unique_ptr<Connection>& conn) {
 
 
 
-
-void getMenu(const unique_ptr<Connection>& conn) {
-
-    int nav;
-    cout << "Faire une reservation : [1]" << endl;
-    cout << "Annuler la reservation : [2]" << endl;
-    cout << "Modifier une reservation : [3]" << endl;
-    cout << "Changer de chambre : [4]" << endl;
-    cout << "Montrer la liste des reservations : [5]" << endl;
-    cout << "Trouver une reservation : [6]" << endl;
-    cout << "Echanger les reservations : [7]" << endl;
-    cout << "Afficher les reservations par nom, prenom ou chambres occupees : [8]" << endl;
-    cout << "Statistique de reservation : [9]" << endl;
-    cout << "Quitter le menu : [0]" << endl;
-    cin >> nav;
-
-
-    switch (nav)
-    {
-    case 1:
-        break;
-    case 2:
-        undoReserv(conn);
-        break;
-    case 3:
-        ModifyReserv(conn);
-        break;
-    case 4:
-        changeChambre(conn);
-        break;
-    case 5:
-        showAllReserv(conn);
-        break;
-    case 6:
-        findReserv(conn);
-        break;
-    case 7:
-        echangeReserv(conn);
-        break;
-    case 8:
-        showOneReserv(conn);
-        break;
-    case 9:
-        stats(conn);
-        break;
-    case 0:
-        leaveMenu(conn);
-        break;
-    };
-}
-
-
+//Reservation faite sur mariaDB
 void doReserv(int n) {
 
     try {
@@ -154,7 +102,7 @@ void doReserv(int n) {
 
         unique_ptr<sql::PreparedStatement> stmt(conn->prepareStatement(query));
 
-        cout << "Fonction appelee";
+        cout << "doReserv appelee";
 
         stmt->setString(1, chambres[n].nom);
         stmt->setString(2, chambres[n].prenom);
@@ -185,9 +133,27 @@ void echangeReserv(const unique_ptr<Connection>& conn) {
 void showAllReserv(const unique_ptr<Connection>& conn) {
 
 }
+//Annulation de reservation faite sur mariaDB
+void undoReserv(int n) {
+    cout << "UndoReserv est appelee";
 
-void undoReserv(const unique_ptr<Connection>& conn) {
-    cout << "Annuler la reservation";
+    try {
+        unique_ptr<sql::Connection> conn = initialiseConn();
+        string query = "UPDATE Chambres SET Nom = ?, Prenom = ?, isReserved = ? WHERE Numero = ?";
+
+        unique_ptr<sql::PreparedStatement> stmt(conn->prepareStatement(query));
+
+        stmt->setString(1, chambres[n].nom);
+        stmt->setString(2, chambres[n].prenom);
+        stmt->setBoolean(3, chambres[n].isReserved);
+        stmt->setInt(4, chambres[n].numero);
+
+        stmt->executeQuery();
+
+    }
+    catch (sql::SQLException& e) {
+        std::cerr << "Erreur lors de l'exécution de la requête : " << e.what() << std::endl;
+    }
 }
 
 void showOneReserv(const unique_ptr<Connection>& conn) {

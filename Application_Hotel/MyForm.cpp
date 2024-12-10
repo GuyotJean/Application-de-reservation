@@ -1,12 +1,12 @@
 #include "MyForm.h"
 
-
 using namespace System;
 using namespace System::Windows::Forms;
 
 using namespace ApplicationHotel;
 
 //Mise a jour des checkbox automatique + mise a jour de la structure chambres
+//Methode sur les checkbox
 void MyForm::OnCheckBoxCheckedChanged(System::Object^ sender, System::EventArgs^ e)
 {
     //Partie de mise à jour des checkbox, merci Chat GPT
@@ -23,6 +23,8 @@ void MyForm::OnCheckBoxCheckedChanged(System::Object^ sender, System::EventArgs^
     }
 
     //Conversion de la valeur text pour des integer utilisable
+    //Recuperation de la valeur integer dans affichage de numero
+    //Pour mettre a jour isReserved dans le vector global
     String^ result;
     for each(Char c in clickedCheckBox->Text) {
         if (Char::IsDigit(c)) {
@@ -35,6 +37,7 @@ void MyForm::OnCheckBoxCheckedChanged(System::Object^ sender, System::EventArgs^
     //Mise a jour de la structure chambres  
     for (int i = 0; i < chambres.size(); i++) {
         if (chambres[i].numero == numeroInteger) {
+            //isReserved passera a true ce qui permet de trouver la table pour la requete ensuite
             cout << "Correspondance trouve pour : " << chambres[i].numero << endl;
             if (chambres[i].isReserved == false) {
                 chambres[i].isReserved = true;
@@ -44,6 +47,7 @@ void MyForm::OnCheckBoxCheckedChanged(System::Object^ sender, System::EventArgs^
             }
         }
     }
+
     //Debugage
     afficherStruct();
 }
@@ -54,14 +58,18 @@ void MyForm::btnRetour_Click(System::Object^ sender, System::EventArgs^ e) {
     flowLayoutPanel1->Visible = false;
     label3->Text = "";
 
+    //Mise a jour de la structure des chambres quand un utilisateur annule une reservation en cours
+    //Cela remet les valeurs du vector global aux valeurs de bases
     for (int i = 0; i < chambres.size(); i++) {
         if (chambres[i].isReserved == true && chambres[i].nom == "") {
-            if (chambres[i].isReserved == false) {
-                chambres[i].isReserved = true;
-            }
-            else {
-                chambres[i].isReserved = false;
-            }
+            chambres[i].isReserved = false;
+        }
+    }
+    //Mise a jour de la structure des chambres quand un utilisateur annule une annulation de reservation en cours
+    //Cela remet les valeurs du vector global aux valeurs de bases
+    for (int i = 0; i < chambres.size(); i++) {
+        if (chambres[i].isReserved == false && chambres[i].nom != "") {
+              chambres[i].isReserved = true;
         }
     }
 

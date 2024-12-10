@@ -11,18 +11,18 @@ int main()
 
     // Configure Connection
     SQLString url("jdbc:mariadb://localhost:3306/hotel");
-    Properties properties({ {"user", "jean"}, {"password", "123"} });
+    Properties properties({ {"user", "root"}, {"password", ""} });
 
     // Establish Connection
-    unique_ptr<Connection> conn(driver->connect(url, properties));
+    std::unique_ptr<Connection> conn(driver->connect(url, properties));
 
     //Objet de connexion mariaDB
     creationTable(conn);
     
     //Definition du vector global chambres
-    chambres = afficherDonnees(conn);
+    chambres = getData(conn);
 
-    //getMenu(chambres);
+    //Lancement de windows form
     Application::EnableVisualStyles();
     Application::SetCompatibleTextRenderingDefault(false);
     ApplicationHotel::MyForm form;

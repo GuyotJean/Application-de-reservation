@@ -118,7 +118,8 @@
       <EntryPointSymbol>main</EntryPointSymbol>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /y "C:\Program Files\MariaDB\MariaDB C++ Connector 64-bit\*.dll"</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
