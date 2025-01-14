@@ -1,84 +1,53 @@
 #include "header.h"
-
-//Réinitialise la connexion
+//Réinitialise l'objet de connexion
 unique_ptr<sql::Connection> initialiseConn() {
     // Instantiate Driver
     Driver* driver = mariadb::get_driver_instance();
-
     // Configure Connection
     SQLString url("jdbc:mariadb://localhost:3306/hotel");
-    Properties properties({ {"user", "jean"}, {"password", "123"} });
-
+    Properties properties({ {"user", "root"}, {"password", ""} });
     // Establish Connection
     unique_ptr<Connection> conn(driver->connect(url, properties));
-
     return conn;
 }
-
-//Creation de la table si elle n'existe pas
+//On remplie la table si elle est vide
 void creationTable(const unique_ptr<Connection>& conn) {
     try {
-
-
         conn->setSchema("Hotel");
         // Create a new Statement
         unique_ptr<Statement> stmnt(conn->createStatement());
-
         // Execute query
         ResultSet* res = stmnt->executeQuery("SELECT COUNT(*) FROM Chambres");
         res->next();
-
-
         if (res->getInt(1) == 0) {
             cout << "La table est vide : " << endl;
-
             string query = "INSERT INTO Chambres (Numero,isReserved) VALUES (?,?)";
-
             unique_ptr<sql::PreparedStatement> pstmt(conn->prepareStatement(query));
             bool isReserved = false;
-
             for (int i = 1; i < 11; i++) {
                 int data1 = 100 + i;
-
                 pstmt->setInt(1, data1);
                 pstmt->setBoolean(2, isReserved);
-
                 pstmt->executeUpdate();
-
             }
-
             cout << "Table prete." << endl;
-            system("cls");
-            //AfficherDonnees(conn);
         }
-
         else {
             cout << "Table deja remplie." << endl;
-            system("cls");
-            //AfficherDonnees(conn);
         }
     }
     catch (SQLException) {
-
     }
-
-
 }
-
 //Prend les data mariaDB et les mets dans un vector de structures global
 vector<Chambres> getData(const unique_ptr<Connection>& conn) {
     // Create a new Statement
     unique_ptr<Statement> stmnt(conn->createStatement());
-
     // Execute query
     ResultSet* res = stmnt->executeQuery("SELECT * FROM Chambres");
-
     // Loop through and print results
-
     int i = 0;
-
     vector<Chambres> chambres;
-
     while (res->next()) {
         chambres.push_back(Chambres());
         chambres[i].numero = res->getInt(2);
@@ -87,12 +56,8 @@ vector<Chambres> getData(const unique_ptr<Connection>& conn) {
         chambres[i].isReserved = res->getBoolean(5);
         i++;
     }
-
     return chambres;
 }
-
-
-
 //Reservation faite sur mariaDB
 void doReserv(int n) {
 
@@ -117,19 +82,15 @@ void doReserv(int n) {
     }
     
 }
-
 void changeChambre(const unique_ptr<Connection>& conn) {
 
 }
-
 void findReserv(const unique_ptr<Connection>& conn) {
 
 }
-
 void echangeReserv(const unique_ptr<Connection>& conn) {
 
 }
-
 void showAllReserv(const unique_ptr<Connection>& conn) {
 
 }
@@ -155,27 +116,17 @@ void undoReserv(int n) {
         std::cerr << "Erreur lors de l'exécution de la requête : " << e.what() << std::endl;
     }
 }
-
 void showOneReserv(const unique_ptr<Connection>& conn) {
-
 }
-
 void stats(const unique_ptr<Connection>& conn) {
 
 }
-
-
 void ModifyReserv(const unique_ptr<Connection>& conn) {
     cout << "Modifier la reservation : ";
 }
-
-
 void leaveMenu(const unique_ptr<Connection>& conn) {
     cout << "Vous etes sorti(e).";
 }
-
-
-
 void afficherStruct() {
     for (Chambres chambre : chambres) {
         cout << chambre.numero << endl;

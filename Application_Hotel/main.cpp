@@ -7,7 +7,7 @@ vector<Chambres> chambres;
 int main()
 {
     // Instantiate Driver
-    Driver* driver = mariadb::get_driver_instance();
+    Driver* driver = mariadb::get_driver_instance();    
 
     // Configure Connection
     SQLString url("jdbc:mariadb://localhost:3306/hotel");
@@ -21,7 +21,8 @@ int main()
     
     //Definition du vector global chambres
     chambres = getData(conn);
-
+    //Affectation de la variable booléenne global pour la liste
+    //listPage = false;
     //Lancement de windows form
     Application::EnableVisualStyles();
     Application::SetCompatibleTextRenderingDefault(false);

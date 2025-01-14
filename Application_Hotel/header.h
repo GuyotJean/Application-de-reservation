@@ -10,20 +10,18 @@ using namespace std;
 using namespace sql;
 using namespace System;
 using namespace System::Windows::Forms;
-
+//Structure contenu dans le vector global
 struct Chambres {
     string nom;
     string prenom;
     int numero;
     bool isReserved;
 };
-
 //Declaration de variable global
     //Vector pour preparer les donnes pour les requêtes
 extern vector<Chambres> chambres;
-    //Objet de connexion mariaDB
-
-
+    //Autre variable booléenne pour savoir quand la page liste est presente
+extern bool listPage;
 //Definition des fonctions
 //Réinitialise l'objet mariaDB de la connexion
 unique_ptr<sql::Connection> initialiseConn();

@@ -1,10 +1,13 @@
 #include "MyForm.h"
-
 using namespace System;
 using namespace System::Windows::Forms;
-
 using namespace ApplicationHotel;
-
+//Création d'une copie du vector global
+vector<Chambres> chambresTrie;
+//Création de variable booléenne pour savoir quand trier la liste par ordre
+bool listPage = false;
+//Alphabetique ou l'inverse
+bool nameTrie = false, prenomTrie = false, numeroTrie = false, started = false;
 //Mise a jour des checkbox automatique + mise a jour de la structure chambres
 //Methode sur les checkbox
 void MyForm::OnCheckBoxCheckedChanged(System::Object^ sender, System::EventArgs^ e)
@@ -51,12 +54,8 @@ void MyForm::OnCheckBoxCheckedChanged(System::Object^ sender, System::EventArgs^
     //Debugage
     afficherStruct();
 }
-
-//Boutton Retour
-void MyForm::btnRetour_Click(System::Object^ sender, System::EventArgs^ e) {
-    flowLayoutPanel1->Controls->Clear();
-    flowLayoutPanel1->Visible = false;
-    label3->Text = "";
+//Methode qui rend le vector global chambres toujours à jours des donnés à chaque boutons clické
+void MyForm::RenduChambres() {
 
     //Mise a jour de la structure des chambres quand un utilisateur annule une reservation en cours
     //Cela remet les valeurs du vector global aux valeurs de bases
@@ -69,11 +68,18 @@ void MyForm::btnRetour_Click(System::Object^ sender, System::EventArgs^ e) {
     //Cela remet les valeurs du vector global aux valeurs de bases
     for (int i = 0; i < chambres.size(); i++) {
         if (chambres[i].isReserved == false && chambres[i].nom != "") {
-              chambres[i].isReserved = true;
+            chambres[i].isReserved = true;
         }
     }
-
-
+}
+//Boutton Retour
+void MyForm::btnRetour_Click(System::Object^ sender, System::EventArgs^ e) {
+    //Etre sur que le vector est en accord avec la bdd
+    RenduChambres();
+    //Reset graphique quand le bouton retour est clické
+    flowLayoutPanel1->Controls->Clear();
+    flowLayoutPanel1->Visible = false;
+    label3->Text = "";
     labelNom->Visible = false;
     labelPrenom->Visible = false;
     btnOk->Text = "";
@@ -84,7 +90,158 @@ void MyForm::btnRetour_Click(System::Object^ sender, System::EventArgs^ e) {
     panel1->Visible = false;
     btnOk->Visible = false;
     btnRetour->Visible = false;
+    listView1->Visible = false;
     afficherStruct();
 }
-
-
+//Trier par ordre croissant par rapport a la colonne des noms
+bool compareByNameCroissant(const Chambres& a, const Chambres& b) {
+    return a.nom < b.nom;
+}
+//Trier par ordre decroissant par rapport a la colonne des noms
+bool compareByNameNonCroissant(const Chambres& a, const Chambres& b) {
+    return a.nom > b.nom;
+}
+//Trier par ordre croissant par rapport a la colonne des prenoms
+bool compareByPrenomCroissant(const Chambres& a, const Chambres& b) {
+    return a.prenom < b.prenom;
+}
+//Trier par ordre décroissant par rapport a la colonne des prenoms
+bool compareByPrenomNonCroissant(const Chambres& a, const Chambres& b) {
+    return a.prenom > b.prenom;
+}
+//Trier par ordre croissant par rapport a la colonne des numeros
+bool compareByNumeroCroissant(const Chambres& a, const Chambres& b) {
+    return a.numero < b.numero;
+}
+//Trier par ordre décroissant par rapport a la colonne des numeros
+bool compareByNumeroDecroissant(const Chambres& a, const Chambres& b) {
+    return a.numero > b.numero;
+}
+//Fonction pour trier les elements de la liste selon les clicks sur les colonnes
+void MyForm::OnClickColumn(System::Object^ sender, ColumnClickEventArgs^ e) {
+    //Si index de colonne == 0, colonne des numeros
+    if (e->Column == 0) {
+        //Si prenom pas trié en alphabetique alors :
+        if (numeroTrie == false) {
+            std::sort(chambresTrie.begin(), chambresTrie.end(), compareByNumeroCroissant);
+            prenomTrie = false, nameTrie = false;
+        }
+        //Sinon trie inversé
+        else if (numeroTrie == true) {
+            std::sort(chambresTrie.begin(), chambresTrie.end(), compareByNumeroDecroissant);
+            prenomTrie = false, nameTrie = false;
+        }
+        numeroTrie = !numeroTrie;
+    }
+    //Si index de colonne == 1, colonne des prenoms
+    if(e->Column == 1) {
+        //Si prenom pas trié en alphabetique alors :
+        if (prenomTrie == false) {
+            std::sort(chambresTrie.begin(), chambresTrie.end(), compareByPrenomCroissant);
+            numeroTrie = false, nameTrie = false;
+        }
+        //Sinon trie inversé
+        else if (prenomTrie == true) {
+            std::sort(chambresTrie.begin(), chambresTrie.end(), compareByPrenomNonCroissant);
+            numeroTrie = false, nameTrie = false;
+        }
+        prenomTrie = !prenomTrie;
+    }
+    //Si index de colonne == 2, colonne des noms
+    cout << "Valeur de nameTrie " << nameTrie << endl;
+    if (e->Column == 2) {
+        if (nameTrie == false) {
+            std::sort(chambresTrie.begin(), chambresTrie.end(), compareByNameCroissant);
+            numeroTrie = false, prenomTrie = false;
+        }
+        else if(nameTrie == true) {
+            std::sort(chambresTrie.begin(), chambresTrie.end(), compareByNameNonCroissant);
+            numeroTrie = false, prenomTrie = false;
+        }
+        nameTrie = !nameTrie;
+    }
+    ClickList();
+}
+//Affiche la liste des réservations
+void MyForm::ClickList()
+{   
+    //Verifie bien que le tableau est en accord avec la BDD
+    RenduChambres();
+    //Affectation de la copie au vector original
+   if(listPage == false) {
+       chambresTrie.clear();
+        for (int i = 0; i < chambres.size(); i++) {
+            if (chambres[i].isReserved == true) {
+                chambresTrie.push_back(chambres[i]);
+            }
+        }
+   }
+   //Affectation de true à liste page pour éviter de reremplir le tableau chambresTrie 
+    listPage = true;
+    //Rend invisible le flowlayoutpanel qui contient les checkbox
+    flowLayoutPanel1->Visible = false;
+    //Clear de la liste pour eviter de faire des doublons à chaque click
+    listView1->Items->Clear();
+    //Mise à jour de l'interface graphique au moment du click sur le bouton liste
+    //Mise a jour graphique de la liste
+    listView1->Visible = true;
+    listView1->View = View::Details;
+    //Utilisation de valeur booléenne pour des actions à ne faire qu'une seule fois
+    if (started == false) {
+        //Ajout de la methode pour les clicks sur les methodes
+        listView1->ColumnClick += gcnew ColumnClickEventHandler(this, &MyForm::OnClickColumn);
+        //Changement de la valeur booléenne    
+        started = true;
+    }
+    //Mise a jour du form et des controls
+    panel1->Visible = true;
+    btnOk->Text = "Suivant";
+    btnRetour->Text = "Retour";
+    label3->Visible = false;
+    label3->Text = "";
+    btnOk->Visible = true;
+    btnRetour->Visible = true;
+    //Remplissage du la liste des réservations
+    for (int i = 0; i < chambresTrie.size(); i++) {
+        //Affichage des chambres uniquement si elles sont réservés
+        if (chambresTrie[i].isReserved == true) {
+            //Ajout des numeros
+            ListViewItem^ item1 = gcnew ListViewItem(chambresTrie[i].numero.ToString());
+            //Conversion de l'element prenom en String^
+            System::String^ prenomManaged = gcnew System::String(chambresTrie[i].prenom.c_str());
+            //Ajout de l'element converti a la liste
+            item1->SubItems->Add(prenomManaged);
+            //Conversion de l'element nom en String^
+            System::String^ nomManaged = gcnew System::String(chambresTrie[i].nom.c_str());
+            //Ajout de l'element converti a la liste
+            item1->SubItems->Add(nomManaged);
+            //Ajout de la ligne a la liste
+            listView1->Items->Add(item1);
+        }
+    }
+}   
+//Gere le bouton suivant quand l'objectif est de trouver reservation par rapport à une valeur
+void MyForm::btnSuivantTrouver() {
+    //Vider le tableau d'objet
+    chambresTrie.clear();
+    //Prise de la valeur dans la textBox
+    string recherche = msclr::interop::marshal_as<std::string>(textBoxNom->Text);
+    //Recherche des correspondance si l'utilisateur a bien mis qlq chose dans la text box
+    if (recherche != "") {
+        for (int i = 0; i < chambres.size(); i++) {
+            if (chambres[i].prenom == recherche || chambres[i].nom == recherche || to_string(chambres[i].numero) == recherche) {
+                chambresTrie.push_back(chambres[i]);
+            }
+        }
+    }
+    if (chambresTrie.size() > 0) {
+        textBoxNom->Text = "";
+        textBoxNom->Visible = false;
+        labelNom->Visible = false;
+        listView1->Visible = true;
+    }
+    for (int i = 0; i < chambresTrie.size(); i++) {
+        cout << chambresTrie[i].prenom << endl;
+        cout << chambresTrie[i].nom << endl;
+    }
+}   

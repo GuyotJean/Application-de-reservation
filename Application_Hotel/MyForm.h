@@ -63,6 +63,14 @@ namespace ApplicationHotel {
     private: System::Windows::Forms::TextBox^ textBoxPrenom;
 
     private: System::Windows::Forms::TextBox^ textBoxNom;
+    private: System::Windows::Forms::ListView^ listView1;
+    private: System::Windows::Forms::ColumnHeader^ columnHeader1;
+    private: System::Windows::Forms::ColumnHeader^ columnHeader2;
+    private: System::Windows::Forms::ColumnHeader^ columnHeader3;
+
+
+
+
 
 
 
@@ -104,6 +112,10 @@ namespace ApplicationHotel {
             this->btnRetour = (gcnew System::Windows::Forms::Button());
             this->labelNom = (gcnew System::Windows::Forms::Label());
             this->panel1 = (gcnew System::Windows::Forms::Panel());
+            this->listView1 = (gcnew System::Windows::Forms::ListView());
+            this->columnHeader1 = (gcnew System::Windows::Forms::ColumnHeader());
+            this->columnHeader2 = (gcnew System::Windows::Forms::ColumnHeader());
+            this->columnHeader3 = (gcnew System::Windows::Forms::ColumnHeader());
             this->textBoxPrenom = (gcnew System::Windows::Forms::TextBox());
             this->textBoxNom = (gcnew System::Windows::Forms::TextBox());
             this->labelPrenom = (gcnew System::Windows::Forms::Label());
@@ -131,19 +143,18 @@ namespace ApplicationHotel {
             // flowLayoutPanel1
             // 
             this->flowLayoutPanel1->BackColor = System::Drawing::Color::Transparent;
-            this->flowLayoutPanel1->Location = System::Drawing::Point(1088, 570);
+            this->flowLayoutPanel1->Location = System::Drawing::Point(1080, 586);
             this->flowLayoutPanel1->Margin = System::Windows::Forms::Padding(4);
             this->flowLayoutPanel1->Name = L"flowLayoutPanel1";
             this->flowLayoutPanel1->Size = System::Drawing::Size(371, 134);
             this->flowLayoutPanel1->TabIndex = 3;
-            this->flowLayoutPanel1->Visible = false;
             this->flowLayoutPanel1->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &MyForm::flowLayoutPanel1_Paint_1);
             // 
             // pictureBox1
             // 
             this->pictureBox1->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox1.BackgroundImage")));
             this->pictureBox1->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-            this->pictureBox1->Location = System::Drawing::Point(249, 142);
+            this->pictureBox1->Location = System::Drawing::Point(252, 150);
             this->pictureBox1->Margin = System::Windows::Forms::Padding(4);
             this->pictureBox1->Name = L"pictureBox1";
             this->pictureBox1->Size = System::Drawing::Size(806, 592);
@@ -243,6 +254,7 @@ namespace ApplicationHotel {
             this->btnListe->TabIndex = 11;
             this->btnListe->Text = L"Liste";
             this->btnListe->UseVisualStyleBackColor = false;
+            this->btnListe->Click += gcnew System::EventHandler(this, &MyForm::btnListe_Click);
             // 
             // btnTrouver
             // 
@@ -259,6 +271,7 @@ namespace ApplicationHotel {
             this->btnTrouver->TabIndex = 12;
             this->btnTrouver->Text = L"Trouver";
             this->btnTrouver->UseVisualStyleBackColor = false;
+            this->btnTrouver->Click += gcnew System::EventHandler(this, &MyForm::btnTrouver_Click);
             // 
             // btnEchanger
             // 
@@ -377,7 +390,7 @@ namespace ApplicationHotel {
             this->labelNom->AutoSize = true;
             this->labelNom->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 16.2F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(0)));
-            this->labelNom->Location = System::Drawing::Point(36, 16);
+            this->labelNom->Location = System::Drawing::Point(39, 72);
             this->labelNom->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
             this->labelNom->Name = L"labelNom";
             this->labelNom->Size = System::Drawing::Size(95, 32);
@@ -392,18 +405,50 @@ namespace ApplicationHotel {
             this->panel1->Controls->Add(this->textBoxNom);
             this->panel1->Controls->Add(this->labelPrenom);
             this->panel1->Controls->Add(this->labelNom);
-            this->panel1->Location = System::Drawing::Point(1099, 570);
+            this->panel1->Location = System::Drawing::Point(1090, 514);
             this->panel1->Margin = System::Windows::Forms::Padding(2);
             this->panel1->Name = L"panel1";
-            this->panel1->Size = System::Drawing::Size(408, 161);
+            this->panel1->Size = System::Drawing::Size(473, 217);
             this->panel1->TabIndex = 20;
             this->panel1->Visible = false;
+            this->panel1->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &MyForm::panel1_Paint);
+            // 
+            // listView1
+            // 
+            this->listView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::ColumnHeader^  >(3) {
+                this->columnHeader1, this->columnHeader2,
+                    this->columnHeader3
+            });
+            this->listView1->HideSelection = false;
+            this->listView1->Location = System::Drawing::Point(1112, 514);
+            this->listView1->Name = L"listView1";
+            this->listView1->Size = System::Drawing::Size(371, 206);
+            this->listView1->TabIndex = 21;
+            this->listView1->UseCompatibleStateImageBehavior = false;
+            this->listView1->View = System::Windows::Forms::View::Details;
+            this->listView1->Visible = false;
+            this->listView1->SelectedIndexChanged += gcnew System::EventHandler(this, &MyForm::listView1_SelectedIndexChanged_1);
+            // 
+            // columnHeader1
+            // 
+            this->columnHeader1->Text = L"Numero";
+            this->columnHeader1->Width = 100;
+            // 
+            // columnHeader2
+            // 
+            this->columnHeader2->Text = L"Prenom";
+            this->columnHeader2->Width = 100;
+            // 
+            // columnHeader3
+            // 
+            this->columnHeader3->Text = L"Nom";
+            this->columnHeader3->Width = 100;
             // 
             // textBoxPrenom
             // 
             this->textBoxPrenom->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(0)));
-            this->textBoxPrenom->Location = System::Drawing::Point(155, 102);
+            this->textBoxPrenom->Location = System::Drawing::Point(176, 120);
             this->textBoxPrenom->Margin = System::Windows::Forms::Padding(2);
             this->textBoxPrenom->Name = L"textBoxPrenom";
             this->textBoxPrenom->Size = System::Drawing::Size(146, 34);
@@ -413,7 +458,7 @@ namespace ApplicationHotel {
             // 
             this->textBoxNom->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(0)));
-            this->textBoxNom->Location = System::Drawing::Point(155, 16);
+            this->textBoxNom->Location = System::Drawing::Point(176, 70);
             this->textBoxNom->Margin = System::Windows::Forms::Padding(2);
             this->textBoxNom->Name = L"textBoxNom";
             this->textBoxNom->Size = System::Drawing::Size(146, 34);
@@ -424,7 +469,7 @@ namespace ApplicationHotel {
             this->labelPrenom->AutoSize = true;
             this->labelPrenom->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 16.2F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(0)));
-            this->labelPrenom->Location = System::Drawing::Point(2, 102);
+            this->labelPrenom->Location = System::Drawing::Point(16, 120);
             this->labelPrenom->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
             this->labelPrenom->Name = L"labelPrenom";
             this->labelPrenom->Size = System::Drawing::Size(128, 32);
@@ -440,10 +485,12 @@ namespace ApplicationHotel {
             this->BackColor = System::Drawing::Color::OldLace;
             this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
             this->ClientSize = System::Drawing::Size(1605, 952);
+            this->Controls->Add(this->listView1);
             this->Controls->Add(this->panel1);
             this->Controls->Add(this->btnRetour);
             this->Controls->Add(this->btnOk);
             this->Controls->Add(this->label3);
+            this->Controls->Add(this->flowLayoutPanel1);
             this->Controls->Add(this->btnQuitter);
             this->Controls->Add(this->btnStats);
             this->Controls->Add(this->btnTrier);
@@ -456,7 +503,6 @@ namespace ApplicationHotel {
             this->Controls->Add(this->label2);
             this->Controls->Add(this->label1);
             this->Controls->Add(this->pictureBox1);
-            this->Controls->Add(this->flowLayoutPanel1);
             this->Controls->Add(this->btnGo);
             this->Margin = System::Windows::Forms::Padding(4);
             this->Name = L"MyForm";
@@ -470,13 +516,30 @@ namespace ApplicationHotel {
 
         }
 #pragma endregion
+private: System::Void btnSuivantTrouver();
+        //Methode pour bien mettre à jour vector global Chambres à chaque click des boutons
+private: System::Void RenduChambres();
+        //Declaration de methode pour gerer la liste
+private: System::Void ClickList();
+        //Declaration de methode pour mettre a jours les checkbox quand elle sont clickés
 private: System::Void OnCheckBoxCheckedChanged(System::Object^ sender, System::EventArgs^ e);
+       //Declaration de methode pour trier la liste
+       //quand on click sur le titres des colonnes de la liste
+private: System::Void OnClickColumn(System::Object^ sender, ColumnClickEventArgs^ e);
 private: System::Void pictureBox1_Click(System::Object^ sender, System::EventArgs^ e) {
 }
         //Boutton de Réservation
 private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+    //Verification que le tableau concorde bien avec la bdd
+    RenduChambres();
+    //Changement du label du nom
+    labelNom->Text = "";
     //Clear sur le Layout Panel pour ne pas re ecrire les box a chaque click
     flowLayoutPanel1->Controls->Clear();
+    //Rend invisible le panel qui contient les textBox et la liste
+    panel1->Visible = false;
+    //Rend invisible la liste
+    listView1->Visible = false;
     //Creation des checkbox
     for (int i = 0; i < chambres.size(); ++i) {
         // Verification que les chambres sont bien libre
@@ -486,7 +549,7 @@ private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e
             checkBox->AutoSize = true;
             checkBox->Name = L"checkBox" + i;
             //Ajout d'une methode sur chaque checkbox
-            checkBox->CheckedChanged += gcnew System::EventHandler(this, &MyForm::OnCheckBoxCheckedChanged);
+            checkBox->CheckedChanged += gcnew EventHandler(this, &MyForm::OnCheckBoxCheckedChanged);
             // Ajouter la CheckBox à une cellule de TableLayoutPanel
             flowLayoutPanel1->Controls->Add(checkBox);
         }
@@ -519,8 +582,16 @@ private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e
 }
        //Bouton de modification -> Changer le nom et le prenom d'une reservation
 private: System::Void button2_Click_1(System::Object^ sender, System::EventArgs^ e) {
+    //Verification que le tableau concorde bien avec la bdd
+    RenduChambres();
+    //Changement du label du nom
+    labelNom->Text = "";
     //Clear sur le Layout Panel pour ne pas re ecrire les box a chaque click
     flowLayoutPanel1->Controls->Clear();
+    //Rend invisible le panel qui contient les textBox et la liste
+    panel1->Visible = false;
+    //Rend invisible la liste
+    listView1->Visible = false;
     //Creation des checkbox
     for (int i = 0; i < chambres.size(); ++i) {
         // Verification que les chambres sont bien libre
@@ -550,13 +621,19 @@ private: System::Void button2_Click_1(System::Object^ sender, System::EventArgs^
 private: System::Void label3_Click(System::Object^ sender, System::EventArgs^ e) {
 }
 private: System::Void btnRetour_Click(System::Object^ sender, System::EventArgs^ e);
-
 private: System::Void label4_Click(System::Object^ sender, System::EventArgs^ e) {
 }
        //Bouton de validation
             //Ce bouton est utilisé pour differentes requetes
+            //Beaucoup de code dans cette methode
        //Bouton de validation
 private: System::Void btnOk_Click(System::Object^ sender, System::EventArgs^ e) {
+    //Click sur btn suivant quand rechercher reservation
+    bool clickedTrouver = false;
+    if (labelNom->Text == "Trouver : ") {
+        btnSuivantTrouver();
+        clickedTrouver = true;
+    }
     //PARTIE DE RESERVATION
     //Valeur booleanne qui a pour but que l'interface graphique ne se reecrive pas apres l'envoi de la requete
     bool validateReserv = false;
@@ -588,45 +665,38 @@ private: System::Void btnOk_Click(System::Object^ sender, System::EventArgs^ e) 
         btnRetour->Visible = false;
         textBoxNom->Text = "";
         textBoxPrenom->Text = "";
-
+        //Debug
         cout << "Chambres disponibles, prete";
-    }
-
-        
+    }   
     //Modification graphique pour la deuxieme partie de validation pour faire une reservation
     //Comportemnt de base
-    if (validateReserv == false) {
+    if (validateReserv == false && clickedTrouver == false) {
         labelNom->Visible = true;
         labelPrenom->Visible = true;
         labelNom->Text = "Nom : ";
         labelPrenom->Text = "Prenom : ";
+        textBoxPrenom->Visible = true;
         //Echange automatiquement le flowlayoutpanel avec le panel au moment
         //du deuxieme click du bouton suivant
         flowLayoutPanel1->Visible = false;
         panel1->Visible = true;
         btnOk->Text = "Valider";
     }
-
-        //PARTIE ANNULATION DU BOUTON
-        
+        //PARTIE ANNULATION DU BOUTON       
     //Valeur booleanne qui a pour but que l'interface graphique ne se reecrive pas apres l'envoi de la requete
     bool validateAnnul = false;
-
     //Remise à jour graphique
     if (label3->Text == "Chambres réservées : ") {
         textBoxNom->BackColor = System::Drawing::Color::White;
         textBoxPrenom->BackColor = System::Drawing::Color::White;
     }
-
-
     //Annulation d'inscription
     //Verification que les deux textBox ont des valeurs avant d'accepter l'inscription
     //Verification aussi sur valeur du label3 pour que ce code ne soit pas envoye quand
     //utilisateur veut réserver
     if (labelNom->Visible == true && textBoxNom->Text != "" && textBoxPrenom->Text != ""
         && label3->Text == "Chambres réservées : ") {
-        for (int i = 0; i < chambres.size(); i++) {
-            
+        for (int i = 0; i < chambres.size(); i++) {           
             //Verification que la chambre est reservée
             //Verification aussi que le nom et le prenom correspondent a la reservation
             if (chambres[i].isReserved == false 
@@ -640,7 +710,6 @@ private: System::Void btnOk_Click(System::Object^ sender, System::EventArgs^ e) 
                 //Puis appel de la fonction pour mettre a jour la table SQL par
                 undoReserv(i);
                 validateAnnul = true;
-
                 //Reset de l'interface graphique au moment de la validation
                 //pour annuler une reservation
                 flowLayoutPanel1->Controls->Clear();
@@ -657,7 +726,6 @@ private: System::Void btnOk_Click(System::Object^ sender, System::EventArgs^ e) 
                 textBoxPrenom->Text = "";
                 textBoxNom->BackColor = System::Drawing::Color::White;
                 textBoxPrenom->BackColor = System::Drawing::Color::White;
-
             }
             //Comportenment si les noms et prenoms ne correspondent pas
             else {
@@ -666,13 +734,10 @@ private: System::Void btnOk_Click(System::Object^ sender, System::EventArgs^ e) 
             }
         }   
     }
-
     ////PARTIE MODIFICATION DU BOUTON
-    
     if (labelNom->Visible == true && textBoxNom->Text != "" && textBoxPrenom->Text != ""
         && label3->Text == "Chambres modifiables : ") {
         for (int i = 0; i < chambres.size(); i++) {
-
             //Verification que la chambre est reservée
             //Verification aussi que le nom et le prenom correspondent a la reservation
             if (chambres[i].isReserved == false
@@ -684,7 +749,6 @@ private: System::Void btnOk_Click(System::Object^ sender, System::EventArgs^ e) 
                 chambres[i].isReserved = true;
                 //Puis appel de la fonction pour mettre a jour la table SQL par
                 doReserv(i);
-
                 //Reset de l'interface graphique au moment de la validation
                 //pour annuler une reservation
                 flowLayoutPanel1->Controls->Clear();
@@ -701,7 +765,6 @@ private: System::Void btnOk_Click(System::Object^ sender, System::EventArgs^ e) 
                 textBoxPrenom->Text = "";
                 textBoxNom->BackColor = System::Drawing::Color::White;
                 textBoxPrenom->BackColor = System::Drawing::Color::White;
-
             }
             //Comportenment si les noms et prenoms ne correspondent pas
             else {
@@ -711,7 +774,6 @@ private: System::Void btnOk_Click(System::Object^ sender, System::EventArgs^ e) 
         }
         cout << "Chambres modofiable, prete";
     }
-
     //PARTIE POUR ECHANGER LES RESERVATIONS
     if (label3->Text == "Chambres à envoyer : ") {
         bool isEchanged = false;
@@ -747,15 +809,12 @@ private: System::Void btnOk_Click(System::Object^ sender, System::EventArgs^ e) 
                 //Les données dans le vector chambres sont échangé
                 chambres[chambreAremplir].nom = chambres[chambreAvider].nom;
                 chambres[chambreAremplir].prenom = chambres[chambreAvider].prenom;
-
                 chambres[chambreAvider].prenom = "";
                 chambres[chambreAvider].nom = "";
-
                 //Puis la fonction pour mettre a jour la table SQL est envoyé 
                 //Elle est utilisé deux fois, une fois pour chaque ligne
                 doReserv(chambreAvider);
                 doReserv(chambreAremplir);
-
                 //Mise a jour graphique 
                 isEchanged = true;
                 flowLayoutPanel1->Visible = false;
@@ -763,10 +822,8 @@ private: System::Void btnOk_Click(System::Object^ sender, System::EventArgs^ e) 
                 btnRetour->Visible = false;
                 panel1->Visible = false;
                 label3->Visible = false;
-
             }
         }
-
         if (isEchanged == false) {
             //debugage
             cout << "Chambres a envoyer, prete";
@@ -774,17 +831,21 @@ private: System::Void btnOk_Click(System::Object^ sender, System::EventArgs^ e) 
             flowLayoutPanel1->Visible = true;
         }
     }
-
-
 }
-
 private: System::Void labelPrenom_Click(System::Object^ sender, System::EventArgs^ e) {
 }
-
        //Bouton d'ANNULATION DE RESERVATION
-private: System::Void btnAnnul_Click(System::Object^ sender, System::EventArgs^ e) {
+private: System::Void btnAnnul_Click(System::Object^ sender, System::EventArgs^ e)   {
+    //Verification que le tableau concorde bien avec la bdd
+    RenduChambres();
     //Condition pour que en appuyant une seule fois sur Annuler la liste ne soit faite qu'une fois
     flowLayoutPanel1->Controls->Clear();
+    //Rend invisible le panel qui contient les textBox
+    panel1->Visible = false;
+    //Rend invisible la liste
+    listView1->Visible = false;
+    //Changement du label du nom
+    labelNom->Text = "";
     //Creation des checkbox
     for (int i = 0; i < chambres.size(); ++i) {
         // Verification que les chambres ne sont pas libres
@@ -813,10 +874,16 @@ private: System::Void btnAnnul_Click(System::Object^ sender, System::EventArgs^ 
        //Modifier la réservation de la chambre
        //ENVOYER la réservation à une autre chambre
 private: System::Void btnChanger_Click(System::Object^ sender, System::EventArgs^ e) {
+    //Verification que le tableau concorde bien avec la bdd
+    RenduChambres();
     //Condition pour que en appuyant une seule fois sur Echanger la liste ne soit faite qu'une fois
     flowLayoutPanel1->Controls->Clear();
+    //Rend invisible le panel qui contient les textBox et la liste
+    panel1->Visible = false;
+    //Rendre invisible la liste
+    listView1->Visible = false;
         //Creation des checkbox
-        for (int i = 0; i < chambres.size(); ++i) {
+            for (int i = 0; i < chambres.size(); ++i) {
             // Verification que les chambres ne sont pas libres
             if (chambres[i].isReserved == true) {
                 System::Windows::Forms::CheckBox^ checkBox = gcnew System::Windows::Forms::CheckBox();
@@ -840,9 +907,33 @@ private: System::Void btnChanger_Click(System::Object^ sender, System::EventArgs
         btnOk->Visible = true;
         btnRetour->Visible = true;
 }
+       //Boutton pour lister toutes les réservations
+private: System::Void btnListe_Click(System::Object^ sender, System::EventArgs^ e) {
+    listPage = false;
+    ClickList();
+}
        //Boutton pour QUITTER L'APPLICATION
 private: System::Void btnQuitter_Click(System::Object^ sender, System::EventArgs^ e) {
     this->Close();
+}           
+private: System::Void listView1_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void panel1_Paint(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e) {
+}
+private: System::Void listView1_SelectedIndexChanged_1(System::Object^ sender, System::EventArgs^ e) {
+}
+       //TROUVER LES RESERVATION PAR UNE VALEUR
+private: System::Void btnTrouver_Click(System::Object^ sender, System::EventArgs^ e) {
+    panel1->Visible = true;
+    flowLayoutPanel1->Visible = false;
+    labelNom->Visible = true;
+    textBoxPrenom->Visible = false;
+    labelNom->Text = "Trouver : ";
+    btnOk->Visible = true;
+    btnOk->Text = "Suivant";
+    btnRetour->Visible = true;
+    btnRetour->Text = "Retour";
+    listView1->Visible = false;  
 }
 };
 }
