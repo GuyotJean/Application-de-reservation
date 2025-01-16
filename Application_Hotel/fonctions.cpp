@@ -94,8 +94,8 @@ void echangeReserv(const unique_ptr<Connection>& conn) {
 void showAllReserv(const unique_ptr<Connection>& conn) {
 
 }
-//Annulation de reservation faite sur mariaDB
-void undoReserv(int n) {
+//update de la reservation faite sur mariaDB
+void updateReserv(int n) {
     cout << "UndoReserv est appelee";
 
     try {
@@ -132,7 +132,7 @@ void afficherStruct() {
         cout << chambre.numero << endl;
         cout << chambre.nom << endl;
         cout << chambre.prenom << endl;
-        cout << chambre.isReserved << endl << endl;
+        cout << chambre.isReserved << endl;
 
     }
 }

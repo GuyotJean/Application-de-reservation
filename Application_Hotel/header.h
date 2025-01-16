@@ -4,7 +4,8 @@
 #include <string>
 #include <mariadb/conncpp.hpp>
 #include <Windows.h>
-#include <msclr/marshal_cppstd.h>   
+#include <msclr/marshal_cppstd.h>
+#include <utility>
 
 using namespace std;
 using namespace sql;
@@ -37,7 +38,7 @@ void stats(const unique_ptr<Connection>& conn);
 //Creer une reservation dans mariaDB
 void doReserv(int numero);
 //Annule une reservation dans SQL
-void undoReserv(int n);
+void updateReserv(int n);
 void ModifyReserv(const unique_ptr<Connection>& conn);
 void leaveMenu(const unique_ptr<Connection>& conn);
 void creationTable(const unique_ptr<Connection>& conn);

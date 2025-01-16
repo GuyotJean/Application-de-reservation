@@ -52,7 +52,7 @@ void MyForm::OnCheckBoxCheckedChanged(System::Object^ sender, System::EventArgs^
     }
 
     //Debugage
-    afficherStruct();
+    //afficherStruct();
 }
 //Methode qui rend le vector global chambres toujours à jours des donnés à chaque boutons clické
 void MyForm::RenduChambres() {
@@ -235,13 +235,104 @@ void MyForm::btnSuivantTrouver() {
         }
     }
     if (chambresTrie.size() > 0) {
+        //Set up de l'interface graphique pour afficher la liste
+        flowLayoutPanel1->Visible = false;
         textBoxNom->Text = "";
+        panel1->Visible = true;
         textBoxNom->Visible = false;
         labelNom->Visible = false;
         listView1->Visible = true;
+        listView1->Items->Clear();
+        cout << chambresTrie.size();
+        for (int i = 0; i < chambresTrie.size(); i++) {
+            //Affichage des chambres uniquement si elles sont réservés
+            if (chambresTrie[i].isReserved == true) {
+                //Ajout des numeros
+                ListViewItem^ item1 = gcnew ListViewItem(chambresTrie[i].numero.ToString());
+                //Conversion de l'element prenom en String^
+                System::String^ prenomManaged = gcnew System::String(chambresTrie[i].prenom.c_str());
+                //Ajout de l'element converti a la liste
+                item1->SubItems->Add(prenomManaged);
+                //Conversion de l'element nom en String^
+                System::String^ nomManaged = gcnew System::String(chambresTrie[i].nom.c_str());
+                //Ajout de l'element converti a la liste
+                item1->SubItems->Add(nomManaged);
+                //Ajout de la ligne a la liste
+                listView1->Items->Add(item1);
+            }
+        }
     }
     for (int i = 0; i < chambresTrie.size(); i++) {
         cout << chambresTrie[i].prenom << endl;
         cout << chambresTrie[i].nom << endl;
     }
 }   
+//Bouton quand on appuie sur suivant apres avoir clické sur bouton echanger
+void MyForm::btnSuivantEchanger() {
+    if (listPage == true) {
+        //Definition de variable temporaire pour swap certaines valeurs
+        int tempIndex = -1;
+        string tempNom = "";
+        string tempPrenom = "";
+        for (int i = 0; i < chambres.size(); i++) {
+            //Boucle sur le tableau pour 
+            if (chambres[i].isReserved == false && chambres[i].nom != "") {
+                //Echange des valeurs entre les deux index choisis sur les checkBox
+                if (tempIndex > 0) {
+                    //stockage des valeurs temp
+                    tempNom = chambres[tempIndex].nom;
+                    tempPrenom = chambres[tempIndex].prenom;
+                    //Premier swap
+                    chambres[tempIndex].prenom = chambres[i].prenom;
+                    chambres[tempIndex].nom = chambres[i].nom;
+                    chambres[tempIndex].isReserved = true;
+                    //Deuxieme swap
+                    chambres[i].prenom = tempPrenom;
+                    chambres[i].nom = tempNom;
+                    chambres[i].isReserved = true;
+                    //Appelle dux fois de la fonction pour changer directement dans la base de données
+                    updateReserv(tempIndex);
+                    updateReserv(i);
+                }
+                tempIndex = i;
+            }
+        }
+
+        if (tempIndex > -1) {
+            //On cache les futurs checkbox
+            flowLayoutPanel1->Visible = false;
+            //label titre est non visible
+            label3->Visible = false;
+            //text du label
+            label3->Text = "";
+            //Affichage du bouton suivant
+            btnOk->Visible = false;
+            //Affichage du bouton retour
+            btnRetour->Visible = false;
+        }
+
+    }
+    //Clear du panel
+    flowLayoutPanel1->Controls->Clear();
+    //condition pour permettre une seul fois les apparitions des chekboxs grave a la global listPage
+    //Remise a flase a chqaue fois dans myForm.h
+    if (listPage == false) {
+        //Creation du nombre de checkbox egal au nombre de chambre libres
+        for (int i = 0; i < chambres.size(); ++i) {
+            // Verification que les chambres sont bien libre
+            if (chambres[i].isReserved == true && chambres[i].nom != "") {
+                System::Windows::Forms::CheckBox^ checkBox = gcnew System::Windows::Forms::CheckBox();
+                checkBox->Text = "Numero : " + chambres[i].numero.ToString();
+                checkBox->AutoSize = true;
+                checkBox->Name = L"checkBox" + i;
+                //Ajout d'une methode sur chaque checkbox
+                checkBox->CheckedChanged += gcnew System::EventHandler(this, &MyForm::OnCheckBoxCheckedChanged);
+                // Ajouter la CheckBox à une cellule de TableLayoutPanel
+                flowLayoutPanel1->Controls->Add(checkBox);
+            }
+        }
+        //bloquage des prochaines checkbox
+        listPage = true;
+    }
+    afficherStruct();
+}
