@@ -197,6 +197,7 @@ void MyForm::ClickList()
     panel1->Visible = true;
     btnOk->Text = "Suivant";
     btnRetour->Text = "Retour";
+    labelPrenom->Visible = false;
     label3->Visible = false;
     label3->Text = "";
     btnOk->Visible = true;
@@ -229,7 +230,7 @@ void MyForm::btnSuivantTrouver() {
     //Recherche des correspondance si l'utilisateur a bien mis qlq chose dans la text box
     if (recherche != "") {
         for (int i = 0; i < chambres.size(); i++) {
-            if (chambres[i].prenom == recherche || chambres[i].nom == recherche || to_string(chambres[i].numero) == recherche) {
+            if (toUpperCase(chambres[i].prenom) == toUpperCase(recherche) || toUpperCase(chambres[i].nom) == toUpperCase(recherche) || to_string(chambres[i].numero) == recherche) {
                 chambresTrie.push_back(chambres[i]);
             }
         }
@@ -335,4 +336,10 @@ void MyForm::btnSuivantEchanger() {
         listPage = true;
     }
     afficherStruct();
+}
+
+string MyForm::toUpperCase(const std::string& str) {
+    std::string upperStr = str;
+    std::transform(upperStr.begin(), upperStr.end(), upperStr.begin(), std::toupper);
+    return upperStr;
 }

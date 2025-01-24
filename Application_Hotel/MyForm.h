@@ -67,7 +67,8 @@ namespace ApplicationHotel {
     private: System::Windows::Forms::ColumnHeader^ columnHeader1;
     private: System::Windows::Forms::ColumnHeader^ columnHeader2;
     private: System::Windows::Forms::ColumnHeader^ columnHeader3;
-    private: System::Windows::Forms::Label^ labelStats;
+    private: System::Windows::Forms::TextBox^ textBoxStats;
+
 
 
 
@@ -112,6 +113,7 @@ namespace ApplicationHotel {
             this->btnRetour = (gcnew System::Windows::Forms::Button());
             this->labelNom = (gcnew System::Windows::Forms::Label());
             this->panel1 = (gcnew System::Windows::Forms::Panel());
+            this->textBoxStats = (gcnew System::Windows::Forms::TextBox());
             this->listView1 = (gcnew System::Windows::Forms::ListView());
             this->columnHeader1 = (gcnew System::Windows::Forms::ColumnHeader());
             this->columnHeader2 = (gcnew System::Windows::Forms::ColumnHeader());
@@ -119,7 +121,6 @@ namespace ApplicationHotel {
             this->textBoxPrenom = (gcnew System::Windows::Forms::TextBox());
             this->textBoxNom = (gcnew System::Windows::Forms::TextBox());
             this->labelPrenom = (gcnew System::Windows::Forms::Label());
-            this->labelStats = (gcnew System::Windows::Forms::Label());
             (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
             this->panel1->SuspendLayout();
             this->SuspendLayout();
@@ -132,9 +133,10 @@ namespace ApplicationHotel {
             this->btnGo->FlatAppearance->BorderSize = 4;
             this->btnGo->Font = (gcnew System::Drawing::Font(L"Monotype Corsiva", 15.75F, System::Drawing::FontStyle::Italic, System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(0)));
-            this->btnGo->Location = System::Drawing::Point(900, 102);
+            this->btnGo->Location = System::Drawing::Point(1125, 128);
+            this->btnGo->Margin = System::Windows::Forms::Padding(4);
             this->btnGo->Name = L"btnGo";
-            this->btnGo->Size = System::Drawing::Size(105, 43);
+            this->btnGo->Size = System::Drawing::Size(131, 54);
             this->btnGo->TabIndex = 1;
             this->btnGo->Text = L"Réserver";
             this->btnGo->UseVisualStyleBackColor = false;
@@ -143,9 +145,10 @@ namespace ApplicationHotel {
             // flowLayoutPanel1
             // 
             this->flowLayoutPanel1->BackColor = System::Drawing::Color::Transparent;
-            this->flowLayoutPanel1->Location = System::Drawing::Point(864, 469);
+            this->flowLayoutPanel1->Location = System::Drawing::Point(1080, 586);
+            this->flowLayoutPanel1->Margin = System::Windows::Forms::Padding(4);
             this->flowLayoutPanel1->Name = L"flowLayoutPanel1";
-            this->flowLayoutPanel1->Size = System::Drawing::Size(297, 107);
+            this->flowLayoutPanel1->Size = System::Drawing::Size(371, 134);
             this->flowLayoutPanel1->TabIndex = 3;
             this->flowLayoutPanel1->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &MyForm::flowLayoutPanel1_Paint_1);
             // 
@@ -153,9 +156,10 @@ namespace ApplicationHotel {
             // 
             this->pictureBox1->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox1.BackgroundImage")));
             this->pictureBox1->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-            this->pictureBox1->Location = System::Drawing::Point(202, 120);
+            this->pictureBox1->Location = System::Drawing::Point(252, 150);
+            this->pictureBox1->Margin = System::Windows::Forms::Padding(4);
             this->pictureBox1->Name = L"pictureBox1";
-            this->pictureBox1->Size = System::Drawing::Size(645, 474);
+            this->pictureBox1->Size = System::Drawing::Size(806, 592);
             this->pictureBox1->TabIndex = 4;
             this->pictureBox1->TabStop = false;
             this->pictureBox1->Click += gcnew System::EventHandler(this, &MyForm::pictureBox1_Click_1);
@@ -166,9 +170,10 @@ namespace ApplicationHotel {
             this->label1->Font = (gcnew System::Drawing::Font(L"Mistral", 50, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(0)));
             this->label1->ForeColor = System::Drawing::Color::Black;
-            this->label1->Location = System::Drawing::Point(398, 7);
+            this->label1->Location = System::Drawing::Point(498, 9);
+            this->label1->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
             this->label1->Name = L"label1";
-            this->label1->Size = System::Drawing::Size(253, 79);
+            this->label1->Size = System::Drawing::Size(317, 101);
             this->label1->TabIndex = 6;
             this->label1->Text = L"Hotel Yolo";
             this->label1->Click += gcnew System::EventHandler(this, &MyForm::label1_Click);
@@ -178,9 +183,10 @@ namespace ApplicationHotel {
             this->label2->AutoSize = true;
             this->label2->Font = (gcnew System::Drawing::Font(L"Monotype Corsiva", 36, static_cast<System::Drawing::FontStyle>((System::Drawing::FontStyle::Italic | System::Drawing::FontStyle::Underline)),
                 System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
-            this->label2->Location = System::Drawing::Point(972, 29);
+            this->label2->Location = System::Drawing::Point(1215, 36);
+            this->label2->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
             this->label2->Name = L"label2";
-            this->label2->Size = System::Drawing::Size(159, 57);
+            this->label2->Size = System::Drawing::Size(198, 72);
             this->label2->TabIndex = 7;
             this->label2->Text = L"Menu : ";
             // 
@@ -192,9 +198,10 @@ namespace ApplicationHotel {
             this->btnAnnul->FlatAppearance->BorderSize = 4;
             this->btnAnnul->Font = (gcnew System::Drawing::Font(L"Monotype Corsiva", 15.75F, System::Drawing::FontStyle::Italic, System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(0)));
-            this->btnAnnul->Location = System::Drawing::Point(1026, 102);
+            this->btnAnnul->Location = System::Drawing::Point(1282, 128);
+            this->btnAnnul->Margin = System::Windows::Forms::Padding(4);
             this->btnAnnul->Name = L"btnAnnul";
-            this->btnAnnul->Size = System::Drawing::Size(105, 43);
+            this->btnAnnul->Size = System::Drawing::Size(131, 54);
             this->btnAnnul->TabIndex = 8;
             this->btnAnnul->Text = L"Annuler";
             this->btnAnnul->UseVisualStyleBackColor = false;
@@ -208,9 +215,10 @@ namespace ApplicationHotel {
             this->btnModify->FlatAppearance->BorderSize = 4;
             this->btnModify->Font = (gcnew System::Drawing::Font(L"Monotype Corsiva", 15.75F, System::Drawing::FontStyle::Italic, System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(0)));
-            this->btnModify->Location = System::Drawing::Point(900, 162);
+            this->btnModify->Location = System::Drawing::Point(1125, 202);
+            this->btnModify->Margin = System::Windows::Forms::Padding(4);
             this->btnModify->Name = L"btnModify";
-            this->btnModify->Size = System::Drawing::Size(105, 43);
+            this->btnModify->Size = System::Drawing::Size(131, 54);
             this->btnModify->TabIndex = 9;
             this->btnModify->Text = L"Modifier";
             this->btnModify->UseVisualStyleBackColor = false;
@@ -224,9 +232,10 @@ namespace ApplicationHotel {
             this->btnChanger->FlatAppearance->BorderSize = 4;
             this->btnChanger->Font = (gcnew System::Drawing::Font(L"Monotype Corsiva", 15.75F, System::Drawing::FontStyle::Italic, System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(0)));
-            this->btnChanger->Location = System::Drawing::Point(1026, 162);
+            this->btnChanger->Location = System::Drawing::Point(1282, 202);
+            this->btnChanger->Margin = System::Windows::Forms::Padding(4);
             this->btnChanger->Name = L"btnChanger";
-            this->btnChanger->Size = System::Drawing::Size(105, 43);
+            this->btnChanger->Size = System::Drawing::Size(131, 54);
             this->btnChanger->TabIndex = 10;
             this->btnChanger->Text = L"Envoyer";
             this->btnChanger->UseVisualStyleBackColor = false;
@@ -240,9 +249,10 @@ namespace ApplicationHotel {
             this->btnListe->FlatAppearance->BorderSize = 4;
             this->btnListe->Font = (gcnew System::Drawing::Font(L"Monotype Corsiva", 15.75F, System::Drawing::FontStyle::Italic, System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(0)));
-            this->btnListe->Location = System::Drawing::Point(900, 220);
+            this->btnListe->Location = System::Drawing::Point(1125, 275);
+            this->btnListe->Margin = System::Windows::Forms::Padding(4);
             this->btnListe->Name = L"btnListe";
-            this->btnListe->Size = System::Drawing::Size(105, 43);
+            this->btnListe->Size = System::Drawing::Size(131, 54);
             this->btnListe->TabIndex = 11;
             this->btnListe->Text = L"Liste";
             this->btnListe->UseVisualStyleBackColor = false;
@@ -256,9 +266,10 @@ namespace ApplicationHotel {
             this->btnTrouver->FlatAppearance->BorderSize = 4;
             this->btnTrouver->Font = (gcnew System::Drawing::Font(L"Monotype Corsiva", 15.75F, System::Drawing::FontStyle::Italic, System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(0)));
-            this->btnTrouver->Location = System::Drawing::Point(1026, 220);
+            this->btnTrouver->Location = System::Drawing::Point(1282, 275);
+            this->btnTrouver->Margin = System::Windows::Forms::Padding(4);
             this->btnTrouver->Name = L"btnTrouver";
-            this->btnTrouver->Size = System::Drawing::Size(105, 43);
+            this->btnTrouver->Size = System::Drawing::Size(131, 54);
             this->btnTrouver->TabIndex = 12;
             this->btnTrouver->Text = L"Trouver";
             this->btnTrouver->UseVisualStyleBackColor = false;
@@ -272,9 +283,10 @@ namespace ApplicationHotel {
             this->btnEchanger->FlatAppearance->BorderSize = 4;
             this->btnEchanger->Font = (gcnew System::Drawing::Font(L"Monotype Corsiva", 15.75F, System::Drawing::FontStyle::Italic, System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(0)));
-            this->btnEchanger->Location = System::Drawing::Point(900, 280);
+            this->btnEchanger->Location = System::Drawing::Point(1125, 350);
+            this->btnEchanger->Margin = System::Windows::Forms::Padding(4);
             this->btnEchanger->Name = L"btnEchanger";
-            this->btnEchanger->Size = System::Drawing::Size(105, 43);
+            this->btnEchanger->Size = System::Drawing::Size(131, 54);
             this->btnEchanger->TabIndex = 13;
             this->btnEchanger->Text = L"Echanger";
             this->btnEchanger->UseVisualStyleBackColor = false;
@@ -288,9 +300,10 @@ namespace ApplicationHotel {
             this->btnStats->FlatAppearance->BorderSize = 4;
             this->btnStats->Font = (gcnew System::Drawing::Font(L"Monotype Corsiva", 15.75F, System::Drawing::FontStyle::Italic, System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(0)));
-            this->btnStats->Location = System::Drawing::Point(1026, 280);
+            this->btnStats->Location = System::Drawing::Point(1282, 350);
+            this->btnStats->Margin = System::Windows::Forms::Padding(4);
             this->btnStats->Name = L"btnStats";
-            this->btnStats->Size = System::Drawing::Size(105, 43);
+            this->btnStats->Size = System::Drawing::Size(131, 54);
             this->btnStats->TabIndex = 15;
             this->btnStats->Text = L"Stats";
             this->btnStats->UseVisualStyleBackColor = false;
@@ -304,9 +317,10 @@ namespace ApplicationHotel {
             this->btnQuitter->FlatAppearance->BorderSize = 4;
             this->btnQuitter->Font = (gcnew System::Drawing::Font(L"Monotype Corsiva", 15.75F, System::Drawing::FontStyle::Italic, System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(0)));
-            this->btnQuitter->Location = System::Drawing::Point(967, 338);
+            this->btnQuitter->Location = System::Drawing::Point(1209, 422);
+            this->btnQuitter->Margin = System::Windows::Forms::Padding(4);
             this->btnQuitter->Name = L"btnQuitter";
-            this->btnQuitter->Size = System::Drawing::Size(105, 43);
+            this->btnQuitter->Size = System::Drawing::Size(131, 54);
             this->btnQuitter->TabIndex = 16;
             this->btnQuitter->Text = L"Quitter";
             this->btnQuitter->UseVisualStyleBackColor = false;
@@ -317,9 +331,10 @@ namespace ApplicationHotel {
             this->label3->AutoSize = true;
             this->label3->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 16.2F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(0)));
-            this->label3->Location = System::Drawing::Point(895, 411);
+            this->label3->Location = System::Drawing::Point(1119, 514);
+            this->label3->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
             this->label3->Name = L"label3";
-            this->label3->Size = System::Drawing::Size(0, 26);
+            this->label3->Size = System::Drawing::Size(0, 32);
             this->label3->TabIndex = 17;
             this->label3->Visible = false;
             this->label3->Click += gcnew System::EventHandler(this, &MyForm::label3_Click);
@@ -332,9 +347,10 @@ namespace ApplicationHotel {
             this->btnOk->FlatAppearance->BorderSize = 4;
             this->btnOk->Font = (gcnew System::Drawing::Font(L"Monotype Corsiva", 15.75F, System::Drawing::FontStyle::Italic, System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(0)));
-            this->btnOk->Location = System::Drawing::Point(900, 590);
+            this->btnOk->Location = System::Drawing::Point(1125, 738);
+            this->btnOk->Margin = System::Windows::Forms::Padding(4);
             this->btnOk->Name = L"btnOk";
-            this->btnOk->Size = System::Drawing::Size(105, 43);
+            this->btnOk->Size = System::Drawing::Size(131, 54);
             this->btnOk->TabIndex = 18;
             this->btnOk->UseVisualStyleBackColor = false;
             this->btnOk->Visible = false;
@@ -348,9 +364,10 @@ namespace ApplicationHotel {
             this->btnRetour->FlatAppearance->BorderSize = 4;
             this->btnRetour->Font = (gcnew System::Drawing::Font(L"Monotype Corsiva", 15.75F, System::Drawing::FontStyle::Italic, System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(0)));
-            this->btnRetour->Location = System::Drawing::Point(1026, 590);
+            this->btnRetour->Location = System::Drawing::Point(1282, 738);
+            this->btnRetour->Margin = System::Windows::Forms::Padding(4);
             this->btnRetour->Name = L"btnRetour";
-            this->btnRetour->Size = System::Drawing::Size(105, 43);
+            this->btnRetour->Size = System::Drawing::Size(131, 54);
             this->btnRetour->TabIndex = 19;
             this->btnRetour->UseVisualStyleBackColor = false;
             this->btnRetour->Visible = false;
@@ -361,10 +378,10 @@ namespace ApplicationHotel {
             this->labelNom->AutoSize = true;
             this->labelNom->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 16.2F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(0)));
-            this->labelNom->Location = System::Drawing::Point(31, 58);
+            this->labelNom->Location = System::Drawing::Point(39, 72);
             this->labelNom->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
             this->labelNom->Name = L"labelNom";
-            this->labelNom->Size = System::Drawing::Size(77, 26);
+            this->labelNom->Size = System::Drawing::Size(95, 32);
             this->labelNom->TabIndex = 0;
             this->labelNom->Text = L"Nom : ";
             this->labelNom->Visible = false;
@@ -372,19 +389,34 @@ namespace ApplicationHotel {
             // 
             // panel1
             // 
-            this->panel1->Controls->Add(this->labelStats);
+            this->panel1->Controls->Add(this->textBoxStats);
             this->panel1->Controls->Add(this->listView1);
             this->panel1->Controls->Add(this->textBoxPrenom);
             this->panel1->Controls->Add(this->textBoxNom);
             this->panel1->Controls->Add(this->labelPrenom);
             this->panel1->Controls->Add(this->labelNom);
-            this->panel1->Location = System::Drawing::Point(872, 411);
+            this->panel1->Location = System::Drawing::Point(1090, 514);
             this->panel1->Margin = System::Windows::Forms::Padding(2);
             this->panel1->Name = L"panel1";
-            this->panel1->Size = System::Drawing::Size(378, 174);
+            this->panel1->Size = System::Drawing::Size(472, 218);
             this->panel1->TabIndex = 20;
             this->panel1->Visible = false;
             this->panel1->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &MyForm::panel1_Paint);
+            // 
+            // textBoxStats
+            // 
+            this->textBoxStats->BackColor = System::Drawing::Color::OldLace;
+            this->textBoxStats->BorderStyle = System::Windows::Forms::BorderStyle::None;
+            this->textBoxStats->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+                static_cast<System::Byte>(0)));
+            this->textBoxStats->Location = System::Drawing::Point(-1, 19);
+            this->textBoxStats->Multiline = true;
+            this->textBoxStats->Name = L"textBoxStats";
+            this->textBoxStats->ReadOnly = true;
+            this->textBoxStats->Size = System::Drawing::Size(362, 96);
+            this->textBoxStats->TabIndex = 22;
+            this->textBoxStats->Visible = false;
+            this->textBoxStats->TextChanged += gcnew System::EventHandler(this, &MyForm::textBoxStats_TextChanged);
             // 
             // listView1
             // 
@@ -393,10 +425,10 @@ namespace ApplicationHotel {
                     this->columnHeader3
             });
             this->listView1->HideSelection = false;
-            this->listView1->Location = System::Drawing::Point(28, 2);
+            this->listView1->Location = System::Drawing::Point(35, 2);
             this->listView1->Margin = System::Windows::Forms::Padding(2);
             this->listView1->Name = L"listView1";
-            this->listView1->Size = System::Drawing::Size(298, 166);
+            this->listView1->Size = System::Drawing::Size(372, 206);
             this->listView1->TabIndex = 21;
             this->listView1->UseCompatibleStateImageBehavior = false;
             this->listView1->View = System::Windows::Forms::View::Details;
@@ -422,20 +454,20 @@ namespace ApplicationHotel {
             // 
             this->textBoxPrenom->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(0)));
-            this->textBoxPrenom->Location = System::Drawing::Point(141, 96);
+            this->textBoxPrenom->Location = System::Drawing::Point(176, 120);
             this->textBoxPrenom->Margin = System::Windows::Forms::Padding(2);
             this->textBoxPrenom->Name = L"textBoxPrenom";
-            this->textBoxPrenom->Size = System::Drawing::Size(118, 28);
+            this->textBoxPrenom->Size = System::Drawing::Size(146, 34);
             this->textBoxPrenom->TabIndex = 3;
             // 
             // textBoxNom
             // 
             this->textBoxNom->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(0)));
-            this->textBoxNom->Location = System::Drawing::Point(141, 56);
+            this->textBoxNom->Location = System::Drawing::Point(176, 70);
             this->textBoxNom->Margin = System::Windows::Forms::Padding(2);
             this->textBoxNom->Name = L"textBoxNom";
-            this->textBoxNom->Size = System::Drawing::Size(118, 28);
+            this->textBoxNom->Size = System::Drawing::Size(146, 34);
             this->textBoxNom->TabIndex = 2;
             // 
             // labelPrenom
@@ -443,31 +475,22 @@ namespace ApplicationHotel {
             this->labelPrenom->AutoSize = true;
             this->labelPrenom->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 16.2F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(0)));
-            this->labelPrenom->Location = System::Drawing::Point(13, 96);
+            this->labelPrenom->Location = System::Drawing::Point(16, 120);
             this->labelPrenom->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
             this->labelPrenom->Name = L"labelPrenom";
-            this->labelPrenom->Size = System::Drawing::Size(101, 26);
+            this->labelPrenom->Size = System::Drawing::Size(128, 32);
             this->labelPrenom->TabIndex = 1;
             this->labelPrenom->Text = L"Prenom :";
             this->labelPrenom->Visible = false;
             this->labelPrenom->Click += gcnew System::EventHandler(this, &MyForm::labelPrenom_Click);
             // 
-            // labelStats
-            // 
-            this->labelStats->Location = System::Drawing::Point(76, 68);
-            this->labelStats->Name = L"labelStats";
-            this->labelStats->Size = System::Drawing::Size(183, 34);
-            this->labelStats->TabIndex = 22;
-            this->labelStats->Text = L"label4";
-            this->labelStats->Click += gcnew System::EventHandler(this, &MyForm::labelStats_Click);
-            // 
             // MyForm
             // 
-            this->AutoScaleDimensions = System::Drawing::SizeF(96, 96);
+            this->AutoScaleDimensions = System::Drawing::SizeF(120, 120);
             this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Dpi;
             this->BackColor = System::Drawing::Color::OldLace;
             this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-            this->ClientSize = System::Drawing::Size(1284, 762);
+            this->ClientSize = System::Drawing::Size(1605, 952);
             this->Controls->Add(this->panel1);
             this->Controls->Add(this->btnRetour);
             this->Controls->Add(this->btnOk);
@@ -485,6 +508,7 @@ namespace ApplicationHotel {
             this->Controls->Add(this->label1);
             this->Controls->Add(this->pictureBox1);
             this->Controls->Add(this->btnGo);
+            this->Margin = System::Windows::Forms::Padding(4);
             this->Name = L"MyForm";
             this->Text = L"MyForm";
             this->Load += gcnew System::EventHandler(this, &MyForm::MyForm_Load);
@@ -496,6 +520,8 @@ namespace ApplicationHotel {
 
         }
 #pragma endregion
+        //Methode pour rendre tout en majuscule
+private: string toUpperCase(const std::string& str);
         //Methode voir dans MyForm.cpp
 private: System::Void btnSuivantEchanger();
        //Methode voir dans MyForm.cpp
@@ -513,6 +539,7 @@ private: System::Void pictureBox1_Click(System::Object^ sender, System::EventArg
 }
         //Boutton de Réservation
 private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+    textBoxStats->Visible = false;
     //Verification que le tableau concorde bien avec la bdd
     RenduChambres();
     //Changement du label du nom
@@ -565,6 +592,7 @@ private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e
 }
        //Bouton de modification -> Changer le nom et le prenom d'une reservation
 private: System::Void button2_Click_1(System::Object^ sender, System::EventArgs^ e) {
+    textBoxStats->Visible = false;
     //Verification que le tableau concorde bien avec la bdd
     RenduChambres();
     //Changement du label du nom
@@ -673,6 +701,10 @@ private: System::Void btnOk_Click(System::Object^ sender, System::EventArgs^ e) 
         panel1->Visible = true;
         btnOk->Text = "Valider";
         textBoxNom->Visible = true;
+        textBoxNom->BackColor = System::Drawing::Color::White;
+        textBoxPrenom->BackColor = System::Drawing::Color::White;
+        textBoxNom->Text = "";
+        textBoxPrenom->Text = "";
     }
         //PARTIE ANNULATION DU BOUTON       
     //Valeur booleanne qui a pour but que l'interface graphique ne se reecrive pas apres l'envoi de la requete
@@ -691,10 +723,10 @@ private: System::Void btnOk_Click(System::Object^ sender, System::EventArgs^ e) 
         for (int i = 0; i < chambres.size(); i++) {           
             //Verification que la chambre est reservée
             //Verification aussi que le nom et le prenom correspondent a la reservation
-            if (chambres[i].isReserved == false 
-                && chambres[i].nom == msclr::interop::marshal_as<std::string>(textBoxNom->Text)
-                && chambres[i].prenom == msclr::interop::marshal_as<std::string>(textBoxPrenom->Text)
-                ) {
+                if (chambres[i].isReserved == false 
+                    && toUpperCase(chambres[i].nom) == msclr::interop::marshal_as<std::string>(textBoxNom->Text->ToUpper())
+                    && toUpperCase(chambres[i].prenom) == msclr::interop::marshal_as<std::string>(textBoxPrenom->Text->ToUpper())
+                    ) {
                 //Si le nom le prenom correspondent on met a jour notre vector global
                 chambres[i].prenom = "";
                 chambres[i].nom = "";
@@ -828,6 +860,7 @@ private: System::Void labelPrenom_Click(System::Object^ sender, System::EventArg
 }
        //Bouton d'ANNULATION DE RESERVATION
 private: System::Void btnAnnul_Click(System::Object^ sender, System::EventArgs^ e)   {
+    textBoxStats->Visible = false;
     //Verification que le tableau concorde bien avec la bdd
     RenduChambres();
     //Condition pour que en appuyant une seule fois sur Annuler la liste ne soit faite qu'une fois
@@ -866,6 +899,8 @@ private: System::Void btnAnnul_Click(System::Object^ sender, System::EventArgs^ 
        //Modifier la réservation de la chambre
        //ENVOYER la réservation à une autre chambre
 private: System::Void btnChanger_Click(System::Object^ sender, System::EventArgs^ e) {
+    //
+    textBoxStats->Visible = false;
     //Verification que le tableau concorde bien avec la bdd
     RenduChambres();
     //Condition pour que en appuyant une seule fois sur Echanger la liste ne soit faite qu'une fois
@@ -904,6 +939,9 @@ private: System::Void btnListe_Click(System::Object^ sender, System::EventArgs^ 
     //utilisation d'une valeur global booléenne pour rénitialiser la liste a chaque click sur btn Liste
     listPage = false;
     ClickList();
+    textBoxStats->Visible = false;
+    textBoxNom->Visible = false;
+    textBoxPrenom->Visible = false;
 }
        //Boutton pour QUITTER L'APPLICATION
 private: System::Void btnQuitter_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -918,6 +956,7 @@ private: System::Void listView1_SelectedIndexChanged_1(System::Object^ sender, S
        //TROUVER LES RESERVATION PAR UNE VALEUR
 private: System::Void btnTrouver_Click(System::Object^ sender, System::EventArgs^ e) {
     //Modification graphique quand utilisateur appuie sur bouton Liste
+    textBoxStats->Visible = false;
     panel1->Visible = true;
     flowLayoutPanel1->Visible = false;
     labelNom->Visible = true;
@@ -970,6 +1009,8 @@ private: System::Void btnEchanger_Click(System::Object^ sender, System::EventArg
     btnOk->Visible = true;
     //Affichage du bouton retour
     btnRetour->Visible = true;
+    //Cacher le btnStats
+    textBoxStats->Visible = false;
 }
 private: System::Void btnStats_Click(System::Object^ sender, System::EventArgs^ e) {
     //Peu de choses sont visible avec ce bouton
@@ -982,8 +1023,25 @@ private: System::Void btnStats_Click(System::Object^ sender, System::EventArgs^ 
     btnOk->Visible = false;
     btnRetour->Visible = false;
     listView1->Visible = false;
+
+    int compteur = 0;
+    for (int i = 0; i < chambres.size(); i++) {
+        if (chambres[i].isReserved == true) {
+            compteur++;
+        }
+    }
+
+    cout << compteur * 10;
+    textBoxStats->Visible = true;
+    textBoxStats->Text = "Il y a actuellement " + compteur * 10 + "% des chambres réservées";
+    btnRetour->Visible = true;
+    btnRetour->Text = "Retour";
+    btnOk->Visible = true;
+    btnOk->Text = "Suivant";
+    panel1->Visible = true;
 }
-private: System::Void labelStats_Click(System::Object^ sender, System::EventArgs^ e) {
+private: System::Void textBoxStats_TextChanged(System::Object^ sender, System::EventArgs^ e) {
 }
 };
 }
+
