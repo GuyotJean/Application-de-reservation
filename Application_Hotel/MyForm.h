@@ -409,7 +409,7 @@ namespace ApplicationHotel {
             this->textBoxStats->BorderStyle = System::Windows::Forms::BorderStyle::None;
             this->textBoxStats->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(0)));
-            this->textBoxStats->Location = System::Drawing::Point(-1, 19);
+            this->textBoxStats->Location = System::Drawing::Point(35, 31);
             this->textBoxStats->Multiline = true;
             this->textBoxStats->Name = L"textBoxStats";
             this->textBoxStats->ReadOnly = true;
@@ -573,8 +573,8 @@ private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e
     btnRetour->Text = "Retour";
     btnOk->Visible = true;
     btnRetour->Visible = true;
-
-
+    textBoxNom->Text = "";
+    textBoxPrenom->Text = "";
 }
 private: System::Void MyForm_Load(System::Object^ sender, System::EventArgs^ e) {
 }
@@ -702,9 +702,7 @@ private: System::Void btnOk_Click(System::Object^ sender, System::EventArgs^ e) 
         btnOk->Text = "Valider";
         textBoxNom->Visible = true;
         textBoxNom->BackColor = System::Drawing::Color::White;
-        textBoxPrenom->BackColor = System::Drawing::Color::White;
-        textBoxNom->Text = "";
-        textBoxPrenom->Text = "";
+        textBoxPrenom->BackColor = System::Drawing::Color::White;   
     }
         //PARTIE ANNULATION DU BOUTON       
     //Valeur booleanne qui a pour but que l'interface graphique ne se reecrive pas apres l'envoi de la requete
@@ -798,7 +796,7 @@ private: System::Void btnOk_Click(System::Object^ sender, System::EventArgs^ e) 
         }
         cout << "Chambres modofiable, prete";
     }
-    //PARTIE POUR ECHANGER LES RESERVATIONS
+    //PARTIE POUR ENVOYER LES RESERVATIONS
     if (label3->Text == "Chambres à envoyer : ") {
         bool isEchanged = false;
         //Clear de toutes les checkbox
@@ -895,6 +893,10 @@ private: System::Void btnAnnul_Click(System::Object^ sender, System::EventArgs^ 
     btnRetour->Text = "Retour";
     btnOk->Visible = true;
     btnRetour->Visible = true;
+    textBoxNom->Text = "";
+    textBoxPrenom->Text = "";
+    textBoxNom->BackColor = System::Drawing::Color::White;
+    textBoxPrenom->BackColor = System::Drawing::Color::White;
 }
        //Modifier la réservation de la chambre
        //ENVOYER la réservation à une autre chambre
@@ -942,6 +944,7 @@ private: System::Void btnListe_Click(System::Object^ sender, System::EventArgs^ 
     textBoxStats->Visible = false;
     textBoxNom->Visible = false;
     textBoxPrenom->Visible = false;
+    btnOk->Visible = false;
 }
        //Boutton pour QUITTER L'APPLICATION
 private: System::Void btnQuitter_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -1023,6 +1026,8 @@ private: System::Void btnStats_Click(System::Object^ sender, System::EventArgs^ 
     btnOk->Visible = false;
     btnRetour->Visible = false;
     listView1->Visible = false;
+    labelPrenom->Visible = false;
+    label3->Visible = false;
 
     int compteur = 0;
     for (int i = 0; i < chambres.size(); i++) {
@@ -1036,8 +1041,6 @@ private: System::Void btnStats_Click(System::Object^ sender, System::EventArgs^ 
     textBoxStats->Text = "Il y a actuellement " + compteur * 10 + "% des chambres réservées";
     btnRetour->Visible = true;
     btnRetour->Text = "Retour";
-    btnOk->Visible = true;
-    btnOk->Text = "Suivant";
     panel1->Visible = true;
 }
 private: System::Void textBoxStats_TextChanged(System::Object^ sender, System::EventArgs^ e) {

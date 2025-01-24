@@ -279,7 +279,7 @@ void MyForm::btnSuivantEchanger() {
             //Boucle sur le tableau pour 
             if (chambres[i].isReserved == false && chambres[i].nom != "") {
                 //Echange des valeurs entre les deux index choisis sur les checkBox
-                if (tempIndex > 0) {
+                if (tempIndex > -1) {
                     //stockage des valeurs temp
                     tempNom = chambres[tempIndex].nom;
                     tempPrenom = chambres[tempIndex].prenom;
