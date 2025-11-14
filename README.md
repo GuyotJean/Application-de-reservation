@@ -18,10 +18,12 @@ The system is connected to a **MariaDB database** to store client data and reser
 
 ## Screenshots
 
-You can add screenshots of the application here:
 
-![Screenshot 1](img/hotel.png)  
+## General view
+![Screenshot 1](img/hotel.png)
+## List of reservation
 ![Screenshot 2](img/liste.png)
+## Reservation
 ![Screenshot 3](img/reservation.png)  
 
 ## Prerequisites
