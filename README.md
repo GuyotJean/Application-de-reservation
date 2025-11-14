@@ -16,14 +16,14 @@ The system is connected to a **MariaDB database** to store client data and reser
 - **Interactive Interface**: Buttons and panels appear or hide depending on actions
 - **Read-only Displays**: Ensure statistics and critical data are safe from accidental modification
 
-## Screenshots
+### Screenshots of the application interface:
 
 
 ## General view
 ![Screenshot 1](img/hotel.png)
 ## List of reservation
 ![Screenshot 2](img/liste.png)
-## Reservation
+## Available Chambers
 ![Screenshot 3](img/reservation.png)  
 
 ## Prerequisites
