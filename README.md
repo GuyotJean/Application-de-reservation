@@ -20,8 +20,9 @@ The system is connected to a **MariaDB database** to store client data and reser
 
 You can add screenshots of the application here:
 
-![Screenshot 1](path/to/screenshot1.png)  
-![Screenshot 2](path/to/screenshot2.png)  
+![Screenshot 1](img/hotel.png)  
+![Screenshot 2](img/liste.png)
+![Screenshot 3](img/reservation.png)  
 
 ## Prerequisites
 
