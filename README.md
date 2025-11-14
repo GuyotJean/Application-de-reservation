@@ -2,69 +2,62 @@
 
 ## Description
 
-This application is a **hotel reservation simulation** developed in **C++/CLI** using **Windows Forms**.  
-It allows managing clients, entering their information, and viewing statistics about reservations.
+This project is a **hotel reservation simulation** developed in **C++/CLI** with **Windows Forms**.  
+It allows users to simulate hotel client management, including adding clients, viewing client information, and checking reservation statistics.  
 
-The interface includes:
-
-- **Buttons**:  
-  - `btnOk` : Confirm the action or input  
-  - `btnRetour` : Go back to the previous screen  
-  - `btnQuitter` : Exit the application  
-  - `btnStats` : Display reservation statistics  
-
-- **Labels**:  
-  - `labelNom` : Displays "Name" for client input  
-  - `labelPrenom` : Displays "First Name" for client input  
-
-- **TextBoxes**:  
-  - `textBoxNom` : Client's last name input  
-  - `textBoxPrenom` : Client's first name input  
-  - `textBoxStats` : Displays reservation statistics  
-
-- **ListView**: `listView1` with columns `Number`, `First Name`, `Last Name` to display the client list  
-
-- **Panel**: `panel1` groups several controls to organize the interface neatly
-
-## Interface
-
-Here’s an overview of the interface:
-
-![Interface Preview](link_to_image.png)  
-
-*(Replace `link_to_image.png` with the path to your screenshot.)*
+The system is connected to a **MariaDB database** to store client data and reservation information.
 
 ## Features
 
-- Add a client with their **first and last name**  
-- Display the list of registered clients  
-- Show details of a selected client  
-- View reservation statistics  
-- Simple navigation with the **Back** button  
-- Dynamic control visibility for a clean and clear interface  
+- **Client Management**: Add, edit, and manage clients easily
+- **List View**: Display all registered clients in a structured table
+- **Statistics Panel**: View aggregated reservation data
+- **Database Integration**: Client and reservation data stored in MariaDB
+- **Interactive Interface**: Buttons and panels appear or hide depending on actions
+- **Read-only Displays**: Ensure statistics and critical data are safe from accidental modification
+
+## Screenshots
+
+You can add screenshots of the application here:
+
+![Screenshot 1](path/to/screenshot1.png)  
+![Screenshot 2](path/to/screenshot2.png)  
 
 ## Prerequisites
 
-- Visual Studio 2019 or 2022  
-- .NET Framework compatible with Windows Forms  
+- **Visual Studio 2019 or 2022** (with C++/CLI support)
+- **MariaDB server** (can be installed via XAMPP or standalone)
+- **MySQL Connector/C++** for connecting to MariaDB
 
-## Build and Run
+## Installation and Setup
 
-1. Open the `.sln` project file in Visual Studio  
-2. Select the `Debug` or `Release` configuration  
-3. Build the project  
-4. Run the application and interact with the interface  
+1. **Install Visual Studio**  
+   - Make sure to include C++/CLI support during installation.  
 
-## Main Events
+2. **Install MariaDB**  
+   - You can use [XAMPP](https://www.apachefriends.org/) or install MariaDB standalone.  
+   - Start the MariaDB server and create a database for the hotel simulation.
 
-| Control        | Event                     | Description                                   |
-|----------------|---------------------------|-----------------------------------------------|
-| `btnRetour`    | Click                     | Go back to the previous screen               |
-| `btnOk`        | Click                     | Confirm the addition or current action       |
-| `listView1`    | SelectedIndexChanged      | Display details of the selected client      |
-| `textBoxStats` | TextChanged               | Dynamically updates the statistics          |
-| `panel1`       | Paint                     | Handles the panel rendering                  |
+3. **Configure the Database**  
+   - Create a database (e.g., `hotel_db`) and tables for clients and reservations.  
+   - Update the database connection string in the project with your credentials.
+
+4. **Install MySQL/MariaDB C++ Connector**  
+   - Download and configure the connector to allow C++/CLI to communicate with MariaDB.  
+
+5. **Open the Project**  
+   - Open the `.sln` file in Visual Studio.  
+   - Build the project.  
+   - Run the application.
+
+## Usage
+
+- Add clients using the client form.  
+- View all clients in the list view.  
+- Access client details and reservation statistics in the dedicated panels.  
+- Navigate between screens using the built-in buttons.
 
 ## Author
 
-Jean Guyot
+Your Name  
+Date
