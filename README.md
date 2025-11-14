@@ -16,7 +16,7 @@ The system is connected to a **MariaDB database** to store client data and reser
 - **Interactive Interface**: Buttons and panels appear or hide depending on actions
 - **Read-only Displays**: Ensure statistics and critical data are safe from accidental modification
 
-### Screenshots of the application interface:
+## Screenshots of the application interface:
 
 
 ## General view
@@ -62,5 +62,4 @@ The system is connected to a **MariaDB database** to store client data and reser
 
 ## Author
 
-Your Name  
-Date
+Jean Guyot
